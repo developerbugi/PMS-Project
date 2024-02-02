@@ -2,8 +2,8 @@ import { createGlobalStyle } from "styled-components";
 import { normalize } from "styled-normalize";
 
 //import components
-import MainPage from "./pages/MainPage";
 import Layout from "./components/common/Layout";
+import EmployeeSystemPage from "./pages/EmployeeSystemPage";
 
 const GlobalStyle = createGlobalStyle`
   ${normalize}
@@ -14,20 +14,13 @@ const GlobalStyle = createGlobalStyle`
 
     font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
   }
-  ::-webkit-scrollbar {
-    width: 6px;
-  }
-  ::-webkit-scrollbar-thumb {
-    background-color: #888;
-    border-radius: 6px;
-  }
 `;
 
 function App() {
   return (
     <Layout>
       <GlobalStyle />
-      <MainPage />
+      <EmployeeSystemPage />
     </Layout>
   );
 }
