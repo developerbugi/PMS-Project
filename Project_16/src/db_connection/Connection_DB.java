@@ -13,8 +13,8 @@ public class Connection_DB {
 
         try
         {
-            Class.forName("com.mysql.jdbc.Driver");
-            conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/?user=root", "root", "as10048782");
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/pmt_table", "root", "as10048782");
             return conn;
         } catch (Exception e)
         {

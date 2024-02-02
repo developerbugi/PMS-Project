@@ -4,7 +4,7 @@ import java.sql.*;
 public class Test_DB1 {
     public String enter_Member()
     {
-        String SQL = "insert into employess values(?,?,?,?)";
+        String SQL = "insert into Employees values(?,?,?,?)";
 
 
         try {
