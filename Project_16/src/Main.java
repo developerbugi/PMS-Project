@@ -1,5 +1,8 @@
+import db_connection.Test_DB1;
+
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Git 연동 Test");
+        Test_DB1 td = new Test_DB1();
+        td.enter_Member();
     }
 }
