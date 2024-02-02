@@ -6,6 +6,11 @@ public class Connection_DB {
 
     public static Connection GetDB()
     {
+
+        String url = "DB URL 주소 ";
+        String user = "본인 MY SQL 이름";
+        String password = "본인 비밀번호";
+
         if (conn != null)
         {
             return conn;
@@ -14,7 +19,7 @@ public class Connection_DB {
         try
         {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/pmt_table", "root", "as10048782");
+            conn =  DriverManager.getConnection(url, user, password);
             return conn;
         } catch (Exception e)
         {
