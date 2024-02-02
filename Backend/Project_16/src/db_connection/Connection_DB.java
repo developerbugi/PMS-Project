@@ -7,9 +7,9 @@ public class Connection_DB {
     public static Connection GetDB()
     {
 
-        String url = "DB URL 주소 ";
-        String user = "본인 MY SQL 이름";
-        String password = "본인 비밀번호";
+        String url = "jdbc:mysql://localhost:3306/pmt_table";
+        String user = "root";
+        String password = "as10048782";
 
         if (conn != null)
         {
