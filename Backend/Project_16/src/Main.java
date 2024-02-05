@@ -1,8 +1,9 @@
-import db_connection.Test_DB1;
+import db_connection.dao.selectDAO;
 
 public class Main {
     public static void main(String[] args) {
-        Test_DB1 td = new Test_DB1();
-        td.enter_Member();
+        selectDAO td = new selectDAO();
+        String result = td.SearchEmployee("0987654321");
+        System.out.println(result);
     }
 }
