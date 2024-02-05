@@ -45,146 +45,161 @@ const SearchEmployeePage = () => {
   };
 
   return (
-    <EmployeeSystemContainer>
-      <Header>
-        <h1>직원 정보 시스템</h1>
-      </Header>
-      <main>
-        <Row className="first-row">
-          <SearchSection>
-            <label htmlFor="name">이름:</label>
-            <InputField
-              type="text"
-              id="name"
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-            />
-            <Button>검색</Button>
-          </SearchSection>
+    <SWrap>
+      <EmployeeSystemContainer>
+        <Header>
+          <h1>직원 정보 시스템</h1>
+        </Header>
+        <main>
+          <Row className="first-row">
+            <SearchSection>
+              <label htmlFor="name">이름:</label>
+              <InputField
+                type="text"
+                id="name"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+              />
+              <Button>검색</Button>
+            </SearchSection>
 
-          <ControlButtons>
-            <Button>저장</Button>
-            <Button>사번 부여</Button>
-            <Button onClick={handleReset}>초기화</Button>
-          </ControlButtons>
-        </Row>
-        <div className="info-section">
-          <Row>
-            <label htmlFor="koreanName">성명(한글):</label>
-            <InputField
-              type="text"
-              id="koreanName"
-              name="koreanName"
-              value={formData.koreanName}
-              onChange={handleChange}
-            />
-            <label htmlFor="englishName">성명(영문):</label>
-            <InputField
-              type="text"
-              id="englishName"
-              name="englishName"
-              value={formData.englishName}
-              onChange={handleChange}
-            />
-            <label htmlFor="ssn">주민번호:</label>
-            <InputField
-              type="text"
-              id="ssn"
-              name="ssn"
-              value={formData.ssn}
-              onChange={handleChange}
-            />
+            <ControlButtons>
+              <Button>저장</Button>
+              <Button>사번 부여</Button>
+              <Button onClick={handleReset}>초기화</Button>
+            </ControlButtons>
           </Row>
-          <Row>
-            <label htmlFor="phoneNumber">휴대폰번호:</label>
-            <InputField
-              type="text"
-              id="phoneNumber"
-              name="phoneNumber"
-              value={formData.phoneNumber}
-              onChange={handleChange}
-            />
-            <label htmlFor="employeeNumber">사번:</label>
-            <InputField
-              type="text"
-              id="employeeNumber"
-              name="employeeNumber"
-              value={formData.employeeNumber}
-              onChange={handleChange}
-            />
-            <label htmlFor="major">전공:</label>
-            <InputField
-              type="text"
-              id="major"
-              name="major"
-              value={formData.major}
-              onChange={handleChange}
-            />
-          </Row>
-          <Row>
-            <label htmlFor="position">직급:</label>
-            <InputField
-              type="text"
-              id="position"
-              name="position"
-              value={formData.position}
-              onChange={handleChange}
-            />
-            <label htmlFor="title">직책:</label>
-            <InputField
-              type="text"
-              id="title"
-              name="title"
-              value={formData.title}
-              onChange={handleChange}
-            />
-            <label htmlFor="department">부서:</label>
-            <InputField
-              type="text"
-              id="department"
-              name="department"
-              value={formData.department}
-              onChange={handleChange}
-            />
-          </Row>
-          <Row>
-            <label htmlFor="address">주소:</label>
-            <InputField
-              type="text"
-              id="address"
-              name="address"
-              value={formData.address}
-              onChange={handleChange}
-            />
-          </Row>
-          <Row>
-            <label htmlFor="email">이메일:</label>
-            <InputField
-              type="text"
-              id="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-            />
-          </Row>
-          <Row>
-            <label htmlFor="notes">기타 특이사항:</label>
-            <TextAreaField
-              id="notes"
-              name="notes"
-              value={formData.notes}
-              onChange={handleChange}
-            />
-          </Row>
-        </div>
-      </main>
-    </EmployeeSystemContainer>
+          <div className="info-section">
+            <Row>
+              <label htmlFor="koreanName">성명(한글):</label>
+              <InputField
+                type="text"
+                id="koreanName"
+                name="koreanName"
+                value={formData.koreanName}
+                onChange={handleChange}
+              />
+              <label htmlFor="englishName">성명(영문):</label>
+              <InputField
+                type="text"
+                id="englishName"
+                name="englishName"
+                value={formData.englishName}
+                onChange={handleChange}
+              />
+              <label htmlFor="ssn">주민번호:</label>
+              <InputField
+                type="text"
+                id="ssn"
+                name="ssn"
+                value={formData.ssn}
+                onChange={handleChange}
+              />
+            </Row>
+            <Row>
+              <label htmlFor="phoneNumber">휴대폰번호:</label>
+              <InputField
+                type="text"
+                id="phoneNumber"
+                name="phoneNumber"
+                value={formData.phoneNumber}
+                onChange={handleChange}
+              />
+              <label htmlFor="employeeNumber">사번:</label>
+              <InputField
+                type="text"
+                id="employeeNumber"
+                name="employeeNumber"
+                value={formData.employeeNumber}
+                onChange={handleChange}
+              />
+              <label htmlFor="major">전공:</label>
+              <InputField
+                type="text"
+                id="major"
+                name="major"
+                value={formData.major}
+                onChange={handleChange}
+              />
+            </Row>
+            <Row>
+              <label htmlFor="position">직급:</label>
+              <InputField
+                type="text"
+                id="position"
+                name="position"
+                value={formData.position}
+                onChange={handleChange}
+              />
+              <label htmlFor="title">직책:</label>
+              <InputField
+                type="text"
+                id="title"
+                name="title"
+                value={formData.title}
+                onChange={handleChange}
+              />
+              <label htmlFor="department">부서:</label>
+              <InputField
+                type="text"
+                id="department"
+                name="department"
+                value={formData.department}
+                onChange={handleChange}
+              />
+            </Row>
+            <Row>
+              <label htmlFor="address">주소:</label>
+              <InputField
+                type="text"
+                id="address"
+                name="address"
+                value={formData.address}
+                onChange={handleChange}
+              />
+            </Row>
+            <Row>
+              <label htmlFor="email">이메일:</label>
+              <InputField
+                type="text"
+                id="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+              />
+            </Row>
+            <Row>
+              <label htmlFor="notes">기타 특이사항:</label>
+              <TextAreaField
+                id="notes"
+                name="notes"
+                value={formData.notes}
+                onChange={handleChange}
+              />
+            </Row>
+          </div>
+        </main>
+      </EmployeeSystemContainer>
+    </SWrap>
   );
 };
 
+const SWrap = styled.div`
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-image: linear-gradient(
+    90deg,
+    #82b2f8 28.12%,
+    #477ebf 65.62%,
+    #477ebf 100%
+  );
+`;
+
 const EmployeeSystemContainer = styled.div`
-  font-family: "Arial", sans-serif;
   max-width: 1000px;
   margin: auto;
   padding: 20px;
