@@ -48,7 +48,7 @@ const SearchEmployeePage = () => {
     <SWrap>
       <EmployeeSystemContainer>
         <Header>
-          <h1>직원 정보 시스템</h1>
+          <h1>사원 조회 시스템</h1>
         </Header>
         <main>
           <Row className="first-row">
