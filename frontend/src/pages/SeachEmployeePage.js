@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 
-const EmployeeSystem = () => {
+const SearchEmployeePage = () => {
   const [formData, setFormData] = useState({
     name: "",
     koreanName: "",
@@ -257,4 +257,4 @@ const Button = styled.button`
   }
 `;
 
-export default EmployeeSystem;
+export default SearchEmployeePage;
