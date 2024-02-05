@@ -1,9 +1,18 @@
+//react import
+import React from "react";
+import { Route, Routes } from "react-router-dom";
+
+//Layout import
 import { createGlobalStyle } from "styled-components";
 import { normalize } from "styled-normalize";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 //import components
 import Layout from "./components/common/Layout";
-import EmployeeSystemPage from "./pages/EmployeeSystemPage";
+import MainPage from "./pages/MainPage";
+import JoinEmployeePage from "./pages/JoinEmployeePage";
+import SearchEmployeePage from "./pages/SeachEmployeePage";
 
 const GlobalStyle = createGlobalStyle`
   ${normalize}
@@ -20,7 +29,12 @@ function App() {
   return (
     <Layout>
       <GlobalStyle />
-      <EmployeeSystemPage />
+      <Routes>
+        <Route path="/" element={<MainPage />} />
+        <Route path="/search/*" element={<SearchEmployeePage />} />
+        <Route path="/join/*" element={<JoinEmployeePage />} />
+      </Routes>
+      <ToastContainer />
     </Layout>
   );
 }
