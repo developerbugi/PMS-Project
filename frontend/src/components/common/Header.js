@@ -1,6 +1,9 @@
-import React, { useState, useEffect, useRef } from "react";
-import styled from "styled-components";
+import React from "react";
 import { NavLink } from "react-router-dom";
+import styled from "styled-components";
+
+// 로고 이미지
+import logo from "../../assets/img/logo-name.svg";
 
 const Navbar = styled.nav`
   position: absolute;
@@ -43,7 +46,7 @@ const SLogoImg = styled.img`
 
 const SP = styled.p`
   font-size: 16px;
-  color: black;
+  font-weight: 600;
   :hover {
     font-weight: 700;
   }
@@ -64,42 +67,23 @@ const nonActiveStyle = {
 
 // 네비게이션 바
 const Header = () => {
-  // dropdown 메뉴
-  const [isdrop, setIsdrop] = useState(false);
-  const dropdownHandler = () => {
-    setIsdrop(!isdrop);
-  };
-  const dropdownHide = () => {
-    setIsdrop(false);
-  };
-
   return (
     <>
       <Navbar id="navbar">
         <NavLeftDiv>
-          <NavDiv onClick={dropdownHide}>
+          <NavDiv>
             <NavLink
               style={({ isActive }) =>
                 isActive ? activeStyle : nonActiveStyle
               }
               to="/"
             >
-              {/* <SLogoImg id="logo" src={logo} alt="#" /> */}
+              <SLogoImg id="logo" src={logo} alt="#" />
             </NavLink>
           </NavDiv>
         </NavLeftDiv>
         <NavRightDiv>
-          <NavDiv onClick={dropdownHide}>
-            <NavLink
-              style={({ isActive }) =>
-                isActive ? activeStyle : nonActiveStyle
-              }
-              to="/join"
-            >
-              <SP className="text">생성</SP>
-            </NavLink>
-          </NavDiv>
-          <NavDiv onClick={dropdownHide}>
+          <NavDiv>
             <NavLink
               style={({ isActive }) =>
                 isActive ? activeStyle : nonActiveStyle
@@ -109,9 +93,20 @@ const Header = () => {
               <SP className="text">조회</SP>
             </NavLink>
           </NavDiv>
+          <NavDiv>
+            <NavLink
+              style={({ isActive }) =>
+                isActive ? activeStyle : nonActiveStyle
+              }
+              to="/join"
+            >
+              <SP className="text">등록</SP>
+            </NavLink>
+          </NavDiv>
         </NavRightDiv>
       </Navbar>
     </>
   );
 };
+
 export default Header;
