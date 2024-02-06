@@ -13,6 +13,12 @@ import Layout from "./components/common/Layout";
 import MainPage from "./pages/MainPage";
 import JoinEmployeePage from "./pages/JoinEmployeePage";
 import SearchEmployeePage from "./pages/SeachEmployeePage";
+import SearchHome from "./components/search/SearchHome";
+import SearchGroup from "./components/search/SearchGroup";
+import SearchVacation from "./components/search/SearchVacation";
+import SearchWork from "./components/search/SearchWork";
+import SearchIn from "./components/search/SearchIn";
+import SearchOut from "./components/search/SearchOut";
 
 const GlobalStyle = createGlobalStyle`
   ${normalize}
@@ -31,8 +37,14 @@ function App() {
       <GlobalStyle />
       <Routes>
         <Route path="/" element={<MainPage />} />
-        <Route path="/search/*" element={<SearchEmployeePage />} />
-        <Route path="/join/*" element={<JoinEmployeePage />} />
+        <Route path="/search" element={<SearchEmployeePage />} />
+        <Route path="/search/home" element={<SearchHome />} />
+        <Route path="/search/group" element={<SearchGroup />} />
+        <Route path="/search/vacation" element={<SearchVacation />} />
+        <Route path="/search/work" element={<SearchWork />} />
+        <Route path="/search/in" element={<SearchIn />} />
+        <Route path="/search/out" element={<SearchOut />} />
+        <Route path="/join" element={<JoinEmployeePage />} />
       </Routes>
       <ToastContainer />
     </Layout>
