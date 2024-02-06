@@ -29,25 +29,6 @@ const JoinEmployeePage = () => {
     }));
   };
 
-  const handleReset = () => {
-    setFormData({
-      name: "",
-      englishName: "",
-      ssn: "",
-      employeeNumber: "",
-      department: "",
-      phoneNumber: "",
-      position: "",
-      major: "",
-      highestLevel: "",
-      employmentType: "",
-      firstDay: "",
-      lastDay: "",
-      email: "",
-      military: "",
-      address: "",
-    });
-  };
 
   return (
     <SWrap>
@@ -64,10 +45,7 @@ const JoinEmployeePage = () => {
                 marginLeft : '5px'
               }}
               >사번 부여</Button>
-              <Button onClick={handleReset}
-              style = {{
-                marginLeft : '5px'
-              }}>초기화</Button>
+              
             </ControlButtons>
           </Row>
 
