@@ -1,196 +1,95 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 
+//import component
+import SearchHome from "../components/search/SearchHome";
+import SearchGroup from "../components/search/SearchGroup";
+import SearchWork from "../components/search/SearchWork";
+import SearchVacation from "../components/search/SearchVacation";
+import SearchIn from "../components/search/SearchIn";
+import SearchOut from "../components/search/SearchOut";
+
+//import image
+import homelogo from "../assets/img/home.svg";
+import grouplogo from "../assets/img/group.svg";
+import vacationlogo from "../assets/img/beach_access.svg";
+import worklogo from "../assets/img/work.svg";
+import inlogo from "../assets/img/login.svg";
+import outlogo from "../assets/img/logout.svg";
+
 const SearchEmployeePage = () => {
-  const [formData, setFormData] = useState({
-    name: "",
-    koreanName: "",
-    englishName: "",
-    ssn: "",
-    phoneNumber: "",
-    employeeNumber: "",
-    major: "",
-    position: "",
-    title: "",
-    department: "",
-    address: "",
-    email: "",
-    notes: "",
-  });
+  const [selectedMenu, setSelectedMenu] = useState(1);
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
+  const handleMenuItemClick = (menuNumber) => {
+    setSelectedMenu(menuNumber);
   };
 
-  const handleReset = () => {
-    setFormData({
-      name: "",
-      koreanName: "",
-      englishName: "",
-      ssn: "",
-      phoneNumber: "",
-      employeeNumber: "",
-      major: "",
-      position: "",
-      title: "",
-      department: "",
-      address: "",
-      email: "",
-      notes: "",
-    });
+  const renderSelectedComponent = () => {
+    switch (selectedMenu) {
+      case 1:
+        return <SearchHome />;
+      case 2:
+        return <SearchGroup />;
+      case 3:
+        return <SearchVacation />;
+      case 4:
+        return <SearchWork />;
+      case 5:
+        return <SearchIn />;
+      case 6:
+        return <SearchOut />;
+      default:
+        return null;
+    }
   };
-
   return (
     <SWrap>
-      <EmployeeSystemContainer>
-        <Header>
-          <h1>사원 조회 시스템</h1>
-        </Header>
-        <main>
-          <Row className="first-row">          
-            <SearchSection>
-              <label htmlFor="name">이름:</label>
-              <InputField
-                type="text"
-                id="name"
-                name="name"
-                value={formData.name}
-                onChange={handleChange}
-              />
-              <Button>검색</Button>
-            </SearchSection>
-
-            <ControlButtons>
-              <Button>저장</Button>
-              <Button>사번 부여</Button>
-              <Button onClick={handleReset}>초기화</Button>
-            </ControlButtons>
-          </Row>
-          <div className="info-section">
-            <Row>
-              <label htmlFor="koreanName">성명(한글):</label>
-              <InputField
-                type="text"
-                id="koreanName"
-                name="koreanName"
-                value={formData.koreanName}
-                onChange={handleChange}
-              />
-              <label htmlFor="englishName">성명(영문):</label>
-              <InputField
-                type="text"
-                id="englishName"
-                name="englishName"
-                value={formData.englishName}
-                onChange={handleChange}
-              />
-              <label htmlFor="ssn">주민번호:</label>
-              <InputField
-                type="text"
-                id="ssn"
-                name="ssn"
-                value={formData.ssn}
-                onChange={handleChange}
-              />
-            </Row>
-            <Row>
-              <label htmlFor="phoneNumber">휴대폰번호:</label>
-              <InputField
-                type="text"
-                id="phoneNumber"
-                name="phoneNumber"
-                value={formData.phoneNumber}
-                onChange={handleChange}
-              />
-              <label htmlFor="employeeNumber">사번:</label>
-              <InputField
-                type="text"
-                id="employeeNumber"
-                name="employeeNumber"
-                value={formData.employeeNumber}
-                onChange={handleChange}
-              />
-              <label htmlFor="major">전공:</label>
-              <InputField
-                type="text"
-                id="major"
-                name="major"
-                value={formData.major}
-                onChange={handleChange}
-              />
-            </Row>
-            <Row>
-              <label htmlFor="position">직급:</label>
-              <InputField
-                type="text"
-                id="position"
-                name="position"
-                value={formData.position}
-                onChange={handleChange}
-              />
-              <label htmlFor="title">직책:</label>
-              <InputField
-                type="text"
-                id="title"
-                name="title"
-                value={formData.title}
-                onChange={handleChange}
-              />
-              <label htmlFor="department">부서:</label>
-              <InputField
-                type="text"
-                id="department"
-                name="department"
-                value={formData.department}
-                onChange={handleChange}
-              />
-            </Row>
-            <Row>
-              <label htmlFor="address">주소:</label>
-              <InputField
-                type="text"
-                id="address"
-                name="address"
-                value={formData.address}
-                onChange={handleChange}
-              />
-            </Row>
-            <Row>
-              <label htmlFor="email">이메일:</label>
-              <InputField
-                type="text"
-                id="email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-              />
-            </Row>
-            <Row>
-              <label htmlFor="notes">기타 특이사항:</label>
-              <TextAreaField
-                id="notes"
-                name="notes"
-                value={formData.notes}
-                onChange={handleChange}
-              />
-            </Row>
-          </div>
-        </main>
-      </EmployeeSystemContainer>
+      <SContainer>
+        <Menu>
+          <MenuItem onClick={() => handleMenuItemClick(1)}>
+            <span>홈</span>
+            <SLogoImg src={homelogo} alt="#" />
+          </MenuItem>
+          <MenuItem onClick={() => handleMenuItemClick(2)}>
+            <span>조직</span>
+            <SLogoImg src={grouplogo} alt="group" />
+          </MenuItem>
+          <MenuItem onClick={() => handleMenuItemClick(3)}>
+            <span>휴가</span>
+            <SLogoImg src={vacationlogo} alt="vacation" />
+          </MenuItem>
+          <MenuItem onClick={() => handleMenuItemClick(4)}>
+            <span>근무</span>
+            <SLogoImg src={worklogo} alt="worktime" />
+          </MenuItem>
+          <MenuItem onClick={() => handleMenuItemClick(5)}>
+            <span>입사</span>
+            <SLogoImg src={inlogo} alt="in" />
+          </MenuItem>
+          <MenuItem onClick={() => handleMenuItemClick(6)}>
+            <span>퇴사</span>
+            <SLogoImg src={outlogo} alt="out" />
+          </MenuItem>
+        </Menu>
+        <SContentDiv>{renderSelectedComponent()}</SContentDiv>
+      </SContainer>
     </SWrap>
   );
 };
+
+const SContentDiv = styled.div``;
+
+const SLogoImg = styled.img`
+  width: 105px;
+  height: 29px;
+  margin-top: 2rem;
+`;
 
 const SWrap = styled.div`
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
   background-image: linear-gradient(
     90deg,
     #82b2f8 28.12%,
@@ -199,77 +98,42 @@ const SWrap = styled.div`
   );
 `;
 
-const EmployeeSystemContainer = styled.div`
-  max-width: 1000px;
-  margin: auto;
-  padding: 20px;
-  border-radius: 8px;
+const SContainer = styled.div`
+  width: 92vw;
+  height: 80vh;
+  border-radius: 1rem;
+  padding: 2rem;
+  margin-top: 6rem;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   background: #f9f9f9;
-`;
-
-const Header = styled.header`
-  h1 {
-    font-size: 24px;
-    color: #333;
-    margin-bottom: 20px;
-  }
-`;
-
-const Row = styled.div`
   display: flex;
-  margin-bottom: 10px;
-
-  &.first-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-  }
+  overflow: hidden;
 `;
 
-const SearchSection = styled.div`
+const Menu = styled.div`
+  width: 100px;
   display: flex;
+  flex-direction: column;
   align-items: center;
-
-  label,
-  input,
-  button {
-    margin-right: 10px;
-  }
+  justify-content: center;
 `;
 
-const ControlButtons = styled.div`
+const MenuItem = styled.div`
   display: flex;
+  flex-direction: column;
   align-items: center;
-`;
-
-const InputField = styled.input`
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  width: 100%;
-`;
-
-const TextAreaField = styled.textarea`
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  width: 100%;
-`;
-
-const Button = styled.button`
-  padding: 10px 15px;
-  border: none;
-  border-radius: 4px;
-  color: white;
-  background-color: #007bff;
+  margin-top: 1rem;
+  padding: 1rem;
   cursor: pointer;
-  transition: background-color 0.3s;
-
+  color: #333;
+  font-size: 1.4rem;
+  font-weight: 1000;
+  transition: color 0.3s ease-in-out;
   &:hover {
-    background-color: #0056b3;
+    color: #82b2f8;
   }
+  flex-grow: 1;
+  border-bottom: 2px solid #ddd;
 `;
 
 export default SearchEmployeePage;
