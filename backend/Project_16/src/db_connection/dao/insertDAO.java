@@ -9,12 +9,12 @@ public class insertDAO {
                                String emp_tmndate, String mob_num, String resign_reason,
                                String rrn, String emp_email, String military,
                                String final_edu, String major, String annual_leave,
-                               String sick_leave) {
+                               String sick_leave,String dep_id, String rank_id) {
         //사번 중복체크 하기 위한 SQL
         String SQL1 = "select * from employees where com_id = ?";
 
         //사원 추가 SQL
-        String SQL2 = "insert into employees values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        String SQL2 = "insert into employees values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
         /*
         String year = String.valueOf(java.time.Year.now().getValue()).substring(2);
@@ -56,6 +56,8 @@ public class insertDAO {
                     ptstm.setString(14, major);
                     ptstm.setString(15, annual_leave);
                     ptstm.setString(16, sick_leave);
+                    ptstm.setString(17, dep_id);
+                    ptstm.setString(18, rank_id);
                     ptstm.executeUpdate();
 
                     Statement state = conn.createStatement();
