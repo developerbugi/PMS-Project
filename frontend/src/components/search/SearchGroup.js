@@ -8,69 +8,69 @@ const SearchGroup = () => {
   // dummy Data
   // 사번 이름 부서 직급
   const dummyData = [
-    { id: 1, name: "정지은", department: "인사부", position: "대리" },
+    { id: 1234, name: "정지은", department: "인사부", position: "대리" },
     {
-      id: 2,
+      id: 2222,
       name: "홍길동",
       department: "IT기획",
       position: "사원",
     },
     {
-      id: 3,
+      id: 3333,
       name: "홍홍홍",
       department: "IT기획",
       position: "사원",
     },
     {
-      id: 4,
+      id: 4444,
       name: "길길길",
       department: "IT기획",
       position: "팀장",
     },
     {
-      id: 5,
+      id: 5555,
       name: "캬캬캬",
       department: "마케팅",
       position: "대리",
     },
     {
-      id: 6,
+      id: 6666,
       name: "쿄쿄쿄",
       department: "영업부",
       position: "사원",
     },
     {
-      id: 6,
+      id: 6777,
       name: "쿄쿄쿄",
       department: "영업부",
       position: "사원",
     },
     {
-      id: 6,
+      id: 6888,
       name: "쿄쿄쿄",
       department: "영업부",
       position: "사원",
     },
     {
-      id: 6,
+      id: 6999,
       name: "쿄쿄쿄",
       department: "영업부",
       position: "사원",
     },
     {
-      id: 6,
+      id: 6000,
       name: "쿄쿄쿄",
       department: "영업부",
       position: "사원",
     },
     {
-      id: 6,
+      id: 6234,
       name: "쿄쿄쿄",
       department: "영업부",
       position: "사원",
     },
     {
-      id: 6,
+      id: 6123,
       name: "쿄쿄쿄",
       department: "영업부",
       position: "사원",
@@ -99,7 +99,7 @@ const SearchGroup = () => {
         <STitle>사원 조회</STitle>
         <SSearchBar
           type="text"
-          placeholder="이름을 입력하세요..."
+          placeholder="이름을 입력하세요"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
           onKeyPress={handleKeyPress} // 엔터 키 입력 감지
@@ -108,6 +108,12 @@ const SearchGroup = () => {
       </SSearchbarDiv>
       <SSearchResultDiv>
         <SSearchResults>
+          <SListItemHeader>
+            <div>사번</div>
+            <div>이름</div>
+            <div>부서</div>
+            <div>직급</div>
+          </SListItemHeader>
           {searchResults.map((person) => (
             <SListItem key={person.id}>
               <div>{person.id}</div>
@@ -121,6 +127,29 @@ const SearchGroup = () => {
     </SWrap>
   );
 };
+
+const SListItemHeader = styled.div`
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  border: 1px solid #ddd;
+  height: 4rem;
+  padding: 0.5rem;
+  margin-bottom: 0.5rem;
+  background-color: #91b7ff;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add box shadow for depth */
+  font-weight: 800;
+  font-size: 1.4rem;
+
+  > div {
+    flex-grow: 1;
+    text-align: center;
+  }
+`;
 
 const STitle = styled.header`
   font-size: 1.8rem;
@@ -143,6 +172,8 @@ const SSearchResultDiv = styled.div`
 
 const SSearchBar = styled.input`
   margin-bottom: 1rem;
+  width: 15vw;
+  height: 3vh;
   padding: 0.5rem;
   border: 1px solid #ddd;
   border-radius: 0.5rem;
@@ -150,7 +181,7 @@ const SSearchBar = styled.input`
 `;
 
 const SSearchButton = styled.button`
-  padding: 0.5rem 1rem;
+  padding: 0.8rem 1.2rem;
   margin-left: 0.5rem;
   border: 1px solid #ddd;
   border-radius: 0.5rem;
