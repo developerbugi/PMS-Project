@@ -78,8 +78,8 @@ const JoinEmployeePage = () => {
           <img src ={employeeImage} 
             alt = "직원 고정 사진"
             style = {{
-              width : '100px',
-              height : '120px', 
+              width : '90px',
+              height : '100px', 
               marginRight: '10px'
             }}
             />
@@ -166,7 +166,7 @@ const JoinEmployeePage = () => {
               </Row>
             </div>
             </div>
-            <Row>
+            <Row style = {{marginTop : '20px'}}>
               <label htmlFor="position"
               style = {{
                 width :'70px'
@@ -237,7 +237,10 @@ const JoinEmployeePage = () => {
               />
             </Row>
             <Row>
-              <label htmlFor="notes">기타 특이사항:</label>
+              <label htmlFor="notes"
+              style = {{
+                width :'100px'
+                }}>기타 특이사항:</label>
               <TextAreaField
                 id="notes"
                 name="notes"
