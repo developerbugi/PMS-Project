@@ -2,14 +2,17 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import employeeImage from '../img/Employee.png';
 import { useNavigate } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
+import GiveNumberPage from "../pages/giveNumberPage";
 
 const JoinEmployeePage = () => {
 
   const navigate = useNavigate();
 
   const navigateToGive = () => {
-    navigate("/giveNumberPage");
+    navigate("/give");
   };
+
 
   const [formData, setFormData] = useState({
     name: "",
@@ -49,14 +52,19 @@ const JoinEmployeePage = () => {
           </Header>
             <ControlButtons >
               <Button>저장</Button>
-              <Button style = {{
+              <Button 
+              onClick={navigateToGive}
+              style = 
+              {{
                 marginLeft : '5px'
               }}
-              onClick={navigateToGive}
-              >사번 부여</Button>
-              
+              >사번 부여</Button>   
             </ControlButtons>
           </Row>
+
+          <Routes>
+          <Route path="/give" element={<GiveNumberPage />}></Route>
+          </Routes>
 
           <div className="info-section">
           <div style={{ display: 'flex', alignItems: 'flex-start' }}>

@@ -23,7 +23,7 @@ const GiveNumberPage = () => {
 
   return (
     <>
-      <h1>사번조회</h1>
+      <h1>사번부여</h1>
       <div style={{ display: 'flex', alignItems: 'center'}}>
         <div style =
         {{
