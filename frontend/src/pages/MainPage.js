@@ -19,6 +19,29 @@ const SWrap = styled.div`
 const STitle = styled.h1`
   font-size: 3.8rem;
   color: white;
+  animation: bounce 2s infinite alternate, shimmer 2s infinite linear;
+
+  @keyframes bounce {
+    0% {
+      transform: translateY(-10px);
+    }
+    100% {
+      transform: translateY(10px);
+    }
+  }
+
+  @keyframes shimmer {
+    0% {
+      text-shadow: 0 0 5px rgba(255, 255, 255, 0.1); /* Less intense initial shadow */
+    }
+    50% {
+      text-shadow: 0 0 7px rgba(255, 255, 255, 0.3),
+        0 0 15px rgba(255, 255, 255, 0.5); /* Less intense intermediate shadow */
+    }
+    100% {
+      text-shadow: 0 0 5px rgba(255, 255, 255, 0.2); /* Less intense final shadow */
+    }
+  }
 `;
 
 const SButton = styled.button`
