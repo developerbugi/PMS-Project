@@ -48,31 +48,25 @@ const JoinEmployeePage = () => {
   return (
     <SWrap>
       <EmployeeSystemContainer>
-        <Header>
-          <h1>사원 등록 시스템</h1>
-        </Header>
+        
         <main>
           <Row className="first-row">
-            <SearchSection>
-              <label htmlFor="name">이름:</label>
-              <InputField
-                type="text"
-                id="name"
-                name="name"
-                value={formData.name}
-                onChange={handleChange}
-              />
-              <Button style = {{
-                width : '100px'
-              }}>검색</Button>
-            </SearchSection>
-
-            <ControlButtons>
+          <Header>
+          <h1>사원 등록 시스템</h1>
+          </Header>
+            <ControlButtons >
               <Button>저장</Button>
-              <Button>사번 부여</Button>
-              <Button onClick={handleReset}>초기화</Button>
+              <Button style = {{
+                marginLeft : '5px'
+              }}
+              >사번 부여</Button>
+              <Button onClick={handleReset}
+              style = {{
+                marginLeft : '5px'
+              }}>초기화</Button>
             </ControlButtons>
           </Row>
+
           <div className="info-section">
           <div style={{ display: 'flex', alignItems: 'flex-start' }}>
           <img src ={employeeImage} 
@@ -86,8 +80,11 @@ const JoinEmployeePage = () => {
             <div>
               <Row style = {{marginLeft : '10px'}}>
                 <label htmlFor="koreanName"
-                style = {{width :'70px'}}
-                >성명(한글):</label>
+                style = {{
+                  width :'70px',
+                  textAlign: 'center'
+                }}
+                >이름 : </label>
                 <InputField
                   type="text"
                   id="koreanName"
@@ -99,9 +96,10 @@ const JoinEmployeePage = () => {
                 <label htmlFor="englishName"
                 style = {{
                   width :'70px',
-                  marginLeft : '10px'
+                  marginLeft : '10px',
+                  textAlign: 'center'
               }}
-                >성명(영문):</label>
+                >영문이름 : </label>
                 <InputField
                   type="text"
                   id="englishName"
@@ -113,9 +111,10 @@ const JoinEmployeePage = () => {
                 <label htmlFor="ssn"
                 style = {{
                   width :'70px',
-                  marginLeft : '10px'
+                  marginLeft : '10px',
+                  textAlign: 'center'
                 }}
-                >주민번호:</label>
+                >주민번호 :</label>
                 <InputField
                   type="text"
                   id="ssn"
@@ -127,8 +126,11 @@ const JoinEmployeePage = () => {
               </Row>
               <Row style = {{marginLeft : '10px'}}>
                 <label htmlFor="phoneNumber"
-                style = {{width :'70px'}}
-                >휴대폰번호:</label>
+                style = {{
+                  width :'70px',
+                  textAlign: 'center'
+                }}
+                >사번 :</label>
                 <InputField
                   type="text"
                   id="phoneNumber"
@@ -140,8 +142,10 @@ const JoinEmployeePage = () => {
                 <label htmlFor="employeeNumber"
                 style = {{
                   width :'70px',
-                  marginLeft : '10px'}}
-                >사번:</label>
+                  marginLeft : '10px',
+                  textAlign: 'center'
+                }}
+                >부서 :</label>
                 <InputField
                   type="text"
                   id="employeeNumber"
@@ -153,8 +157,10 @@ const JoinEmployeePage = () => {
                 <label htmlFor="major"
                 style = {{
                   width :'70px',
-                  marginLeft : '10px'}}
-                >전공:</label>
+                  marginLeft : '10px',
+                  textAlign: 'center'
+                }}
+                >휴대폰번호 :</label>
                 <InputField
                   type="text"
                   id="major"
@@ -169,9 +175,10 @@ const JoinEmployeePage = () => {
             <Row style = {{marginTop : '20px'}}>
               <label htmlFor="position"
               style = {{
-                width :'70px'
+                width :'70px',
+                textAlign: 'center'
                 }}
-              >직급:</label>
+              >직급 :</label>
               <InputField
                 type="text"
                 id="position"
@@ -183,9 +190,10 @@ const JoinEmployeePage = () => {
               <label htmlFor="title"
               style = {{
                 width :'70px',
-                marginLeft : '20px'
+                marginLeft : '20px',
+                textAlign: 'center'
                 }}
-                >직책:</label>
+                >전공 :</label>
               <InputField
                 type="text"
                 id="title"
@@ -197,9 +205,56 @@ const JoinEmployeePage = () => {
               <label htmlFor="department"
               style = {{
                 width :'70px',
-                marginLeft : '20px'
+                marginLeft : '20px',
+                textAlign: 'center'
                 }}
-                >부서:</label>
+                >최종학력 :</label>
+              <InputField
+                type="text"
+                id="department"
+                name="department"
+                value={formData.department}
+                onChange={handleChange}
+                style = {{maxWidth :'150px'}}
+              />
+            </Row>
+            <Row style = {{marginTop : '20px'}}>
+              <label htmlFor="position"
+              style = {{
+                width :'70px',
+                textAlign: 'center'
+                }}
+              >입사구분 :</label>
+              <InputField
+                type="text"
+                id="position"
+                name="position"
+                value={formData.position}
+                onChange={handleChange}
+                style = {{maxWidth :'150px'}}
+              />
+              <label htmlFor="title"
+              style = {{
+                width :'70px',
+                marginLeft : '20px',
+                textAlign: 'center'
+                }}
+                >입사일 :</label>
+              <InputField
+                type="text"
+                id="title"
+                name="title"
+                value={formData.title}
+                onChange={handleChange}
+                style = {{maxWidth :'150px'}}
+              />
+              <label htmlFor="department"
+              style = {{
+                width :'70px',
+                marginLeft : '20px',
+                textAlign: 'center'
+                }}
+                >퇴사일 :</label>
               <InputField
                 type="text"
                 id="department"
@@ -210,41 +265,47 @@ const JoinEmployeePage = () => {
               />
             </Row>
             <Row>
-              <label htmlFor="address"
-              style = {{
-                width :'60px'
-                }}
-                >주소:</label>
-              <InputField
-                type="text"
-                id="address"
-                name="address"
-                value={formData.address}
-                onChange={handleChange}
-              />
-            </Row>
-            <Row>
               <label htmlFor="email"
               style = {{
-                width :'60px'
-                }}>이메일:</label>
+                width :'70px',
+                textAlign: 'center'
+                }}>
+                  이메일 :</label>
               <InputField
                 type="text"
                 id="email"
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
+                style = {{maxWidth :'390px'}}
+              />
+              <label htmlFor="department"
+              style = {{
+                width :'70px',
+                marginLeft : '20px',
+                textAlign: 'center'
+                }}
+                >군필 :</label>
+              <InputField
+                type="text"
+                id="department"
+                name="department"
+                value={formData.department}
+                onChange={handleChange}
+                style = {{maxWidth :'150px'}}
               />
             </Row>
             <Row>
-              <label htmlFor="notes"
+              <label htmlFor="email"
               style = {{
-                width :'100px'
-                }}>기타 특이사항:</label>
-              <TextAreaField
-                id="notes"
-                name="notes"
-                value={formData.notes}
+                width :'55px',
+                textAlign: 'center'
+                }}>주소 :</label>
+              <InputField
+                type="text"
+                id="email"
+                name="email"
+                value={formData.email}
                 onChange={handleChange}
               />
             </Row>
@@ -334,12 +395,12 @@ const Button = styled.button`
   border: none;
   border-radius: 4px;
   color: white;
-  background-color: #007bff;
+  background-color: #699CFF;
   cursor: pointer;
   transition: background-color 0.3s;
 
   &:hover {
-    background-color: #0056b3;
+    background-color: #477EBF;
   }
 `;
 
