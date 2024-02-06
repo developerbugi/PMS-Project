@@ -51,7 +51,7 @@ const SearchEmployeePage = () => {
           <h1>사원 조회 시스템</h1>
         </Header>
         <main>
-          <Row className="first-row">
+          <Row className="first-row">          
             <SearchSection>
               <label htmlFor="name">이름:</label>
               <InputField

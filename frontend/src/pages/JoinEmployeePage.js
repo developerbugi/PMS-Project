@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import employeeImage from '../img/Employee.png';
 
 const JoinEmployeePage = () => {
   const [formData, setFormData] = useState({
@@ -61,7 +62,9 @@ const JoinEmployeePage = () => {
                 value={formData.name}
                 onChange={handleChange}
               />
-              <Button>검색</Button>
+              <Button style = {{
+                width : '100px'
+              }}>검색</Button>
             </SearchSection>
 
             <ControlButtons>
@@ -71,86 +74,147 @@ const JoinEmployeePage = () => {
             </ControlButtons>
           </Row>
           <div className="info-section">
+          <div style={{ display: 'flex', alignItems: 'flex-start' }}>
+          <img src ={employeeImage} 
+            alt = "직원 고정 사진"
+            style = {{
+              width : '100px',
+              height : '120px', 
+              marginRight: '10px'
+            }}
+            />
+            <div>
+              <Row style = {{marginLeft : '10px'}}>
+                <label htmlFor="koreanName"
+                style = {{width :'70px'}}
+                >성명(한글):</label>
+                <InputField
+                  type="text"
+                  id="koreanName"
+                  name="koreanName"
+                  value={formData.koreanName}
+                  onChange={handleChange}
+                  style = {{maxWidth :'100px'}}
+                />
+                <label htmlFor="englishName"
+                style = {{
+                  width :'70px',
+                  marginLeft : '10px'
+              }}
+                >성명(영문):</label>
+                <InputField
+                  type="text"
+                  id="englishName"
+                  name="englishName"
+                  value={formData.englishName}
+                  onChange={handleChange}
+                  style = {{maxWidth :'100px'}}
+                />
+                <label htmlFor="ssn"
+                style = {{
+                  width :'70px',
+                  marginLeft : '10px'
+                }}
+                >주민번호:</label>
+                <InputField
+                  type="text"
+                  id="ssn"
+                  name="ssn"
+                  value={formData.ssn}
+                  onChange={handleChange}
+                  style = {{maxWidth :'100px'}}
+                />
+              </Row>
+              <Row style = {{marginLeft : '10px'}}>
+                <label htmlFor="phoneNumber"
+                style = {{width :'70px'}}
+                >휴대폰번호:</label>
+                <InputField
+                  type="text"
+                  id="phoneNumber"
+                  name="phoneNumber"
+                  value={formData.phoneNumber}
+                  onChange={handleChange}
+                  style = {{maxWidth :'100px'}}
+                />
+                <label htmlFor="employeeNumber"
+                style = {{
+                  width :'70px',
+                  marginLeft : '10px'}}
+                >사번:</label>
+                <InputField
+                  type="text"
+                  id="employeeNumber"
+                  name="employeeNumber"
+                  value={formData.employeeNumber}
+                  onChange={handleChange}
+                  style = {{maxWidth :'100px'}}
+                />
+                <label htmlFor="major"
+                style = {{
+                  width :'70px',
+                  marginLeft : '10px'}}
+                >전공:</label>
+                <InputField
+                  type="text"
+                  id="major"
+                  name="major"
+                  value={formData.major}
+                  onChange={handleChange}
+                  style = {{maxWidth :'100px'}}
+                />
+              </Row>
+            </div>
+            </div>
             <Row>
-              <label htmlFor="koreanName">성명(한글):</label>
-              <InputField
-                type="text"
-                id="koreanName"
-                name="koreanName"
-                value={formData.koreanName}
-                onChange={handleChange}
-              />
-              <label htmlFor="englishName">성명(영문):</label>
-              <InputField
-                type="text"
-                id="englishName"
-                name="englishName"
-                value={formData.englishName}
-                onChange={handleChange}
-              />
-              <label htmlFor="ssn">주민번호:</label>
-              <InputField
-                type="text"
-                id="ssn"
-                name="ssn"
-                value={formData.ssn}
-                onChange={handleChange}
-              />
-            </Row>
-            <Row>
-              <label htmlFor="phoneNumber">휴대폰번호:</label>
-              <InputField
-                type="text"
-                id="phoneNumber"
-                name="phoneNumber"
-                value={formData.phoneNumber}
-                onChange={handleChange}
-              />
-              <label htmlFor="employeeNumber">사번:</label>
-              <InputField
-                type="text"
-                id="employeeNumber"
-                name="employeeNumber"
-                value={formData.employeeNumber}
-                onChange={handleChange}
-              />
-              <label htmlFor="major">전공:</label>
-              <InputField
-                type="text"
-                id="major"
-                name="major"
-                value={formData.major}
-                onChange={handleChange}
-              />
-            </Row>
-            <Row>
-              <label htmlFor="position">직급:</label>
+              <label htmlFor="position"
+              style = {{
+                width :'70px'
+                }}
+              >직급:</label>
               <InputField
                 type="text"
                 id="position"
                 name="position"
                 value={formData.position}
                 onChange={handleChange}
+                style = {{maxWidth :'150px'}}
               />
-              <label htmlFor="title">직책:</label>
+              <label htmlFor="title"
+              style = {{
+                width :'70px',
+                marginLeft : '20px'
+                }}
+                >직책:</label>
               <InputField
                 type="text"
                 id="title"
                 name="title"
                 value={formData.title}
                 onChange={handleChange}
+                style = {{maxWidth :'150px'}}
               />
-              <label htmlFor="department">부서:</label>
+              <label htmlFor="department"
+              style = {{
+                width :'70px',
+                marginLeft : '20px'
+                }}
+                >부서:</label>
               <InputField
                 type="text"
                 id="department"
                 name="department"
                 value={formData.department}
                 onChange={handleChange}
+                style = {{maxWidth :'150px'}}
               />
             </Row>
             <Row>
-              <label htmlFor="address">주소:</label>
+              <label htmlFor="address"
+              style = {{
+                width :'60px'
+                }}
+                >주소:</label>
               <InputField
                 type="text"
                 id="address"
@@ -160,7 +224,10 @@ const JoinEmployeePage = () => {
               />
             </Row>
             <Row>
-              <label htmlFor="email">이메일:</label>
+              <label htmlFor="email"
+              style = {{
+                width :'60px'
+                }}>이메일:</label>
               <InputField
                 type="text"
                 id="email"
@@ -200,7 +267,7 @@ const SWrap = styled.div`
 `;
 
 const EmployeeSystemContainer = styled.div`
-  max-width: 1000px;
+  max-width: 800px;
   margin: auto;
   padding: 20px;
   border-radius: 8px;
@@ -217,6 +284,7 @@ const Header = styled.header`
 `;
 
 const Row = styled.div`
+
   display: flex;
   margin-bottom: 10px;
 
