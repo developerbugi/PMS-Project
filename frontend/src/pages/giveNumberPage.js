@@ -3,14 +3,23 @@ import styled from "styled-components";
 
 const GiveNumberPage = () => {
 
-  const [formData, setFormData] = useState([
-    { 
-      name: "", 
-      employeeNumber: "", 
-      department: "", 
-      isActive: "" 
-  }
-  ]);
+    const [formData, setFormData] = useState({
+        name: "",
+        englishName: "",
+        ssn: "",
+        employeeNumber: "",
+        department: "",
+        phoneNumber: "",
+        position: "",
+        major: "",
+        highestLevel: "",
+        employmentType: "",
+        firstDay: "",
+        lastDay: "",
+        email: "",
+        military: "",
+        address: "",
+      });
 
   return (
     <>

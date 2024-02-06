@@ -1,8 +1,16 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import employeeImage from '../img/Employee.png';
+import { useNavigate } from "react-router-dom";
 
 const JoinEmployeePage = () => {
+
+  const navigate = useNavigate();
+
+  const navigateToGive = () => {
+    navigate("/giveNumberPage");
+  };
+
   const [formData, setFormData] = useState({
     name: "",
     englishName: "",
@@ -44,6 +52,7 @@ const JoinEmployeePage = () => {
               <Button style = {{
                 marginLeft : '5px'
               }}
+              onClick={navigateToGive}
               >사번 부여</Button>
               
             </ControlButtons>
