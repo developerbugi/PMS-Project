@@ -77,7 +77,12 @@ const SearchEmployeePage = () => {
   );
 };
 
-const SContentDiv = styled.div``;
+const SContentDiv = styled.div`
+  margin-left: 2rem;
+  width: 100%;
+  height: 100%;
+  border-left: solid 2px #ddd;
+`;
 
 const SLogoImg = styled.img`
   width: 105px;
