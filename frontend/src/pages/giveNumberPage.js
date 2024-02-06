@@ -3,18 +3,27 @@ import styled from "styled-components";
 
 const GiveNumberPage = () => {
 
-  const [formData, setFormData] = useState([
-    { 
-      name: "", 
-      employeeNumber: "", 
-      department: "", 
-      isActive: "" 
-  }
-  ]);
+    const [formData, setFormData] = useState({
+        name: "",
+        englishName: "",
+        ssn: "",
+        employeeNumber: "",
+        department: "",
+        phoneNumber: "",
+        position: "",
+        major: "",
+        highestLevel: "",
+        employmentType: "",
+        firstDay: "",
+        lastDay: "",
+        email: "",
+        military: "",
+        address: "",
+      });
 
   return (
     <>
-      <h1>사번조회</h1>
+      <h1>사번부여</h1>
       <div style={{ display: 'flex', alignItems: 'center'}}>
         <div style =
         {{
