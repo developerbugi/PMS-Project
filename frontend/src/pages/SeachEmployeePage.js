@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { useRecoilState } from "recoil";
+import { selectedMenuState, selectedIdState } from "../recoil/SearchRecoil";
 
 //import component
 import SearchHome from "../components/search/SearchHome";
@@ -8,6 +10,7 @@ import SearchWork from "../components/search/SearchWork";
 import SearchVacation from "../components/search/SearchVacation";
 import SearchIn from "../components/search/SearchIn";
 import SearchOut from "../components/search/SearchOut";
+import Profile from "../components/search/information/Profile";
 
 //import image
 import homelogo from "../assets/img/home.svg";
@@ -18,9 +21,11 @@ import inlogo from "../assets/img/login.svg";
 import outlogo from "../assets/img/logout.svg";
 
 const SearchEmployeePage = () => {
-  const [selectedMenu, setSelectedMenu] = useState(1);
+  const [selectedMenu, setSelectedMenu] = useRecoilState(selectedMenuState);
+  const [selectedId, setSelectedId] = useRecoilState(selectedIdState);
 
   const handleMenuItemClick = (menuNumber) => {
+    setSelectedId(1);
     setSelectedMenu(menuNumber);
   };
 
@@ -38,10 +43,13 @@ const SearchEmployeePage = () => {
         return <SearchIn />;
       case 6:
         return <SearchOut />;
+      case 7:
+        return <Profile />;
       default:
         return null;
     }
   };
+
   return (
     <SWrap>
       <SContainer>
@@ -105,7 +113,7 @@ const SWrap = styled.div`
 
 const SContainer = styled.div`
   width: 92vw;
-  height: 80vh;
+  /* height: 80vh; */
   border-radius: 1rem;
   padding: 2rem;
   margin-top: 6rem;

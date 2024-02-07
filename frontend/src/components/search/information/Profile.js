@@ -8,6 +8,9 @@ import cameraIcon from "../../../assets/img/camera_enhance.svg";
 import userImage from "../../../assets/img/logo.png";
 import adminImg from "../../../assets/img/admin_label.svg";
 import EmployeeInfo from "./EmployeeInfo";
+import random1 from "../../../assets/img/leaves-8517219_1280.jpg";
+import random2 from "../../../assets/img/squirrel-8536537_1280.jpg";
+import random3 from "../../../assets/img/sunset-8544672_1280.jpg";
 
 const SCameraIcon = styled.img`
   position: absolute;
@@ -134,6 +137,9 @@ const SInput = styled.input`
     `}
 `;
 
+//랜덤값
+const randomImages = [random1, random2, random3];
+
 const Profile = () => {
   const userId = useRecoilValue(selectedIdState);
   const userData = useRecoilValue(userDataState).find(
@@ -156,6 +162,11 @@ const Profile = () => {
   const [phoneNumber, setPhoneNumber] = useState(
     userData ? userData.phoneNumber : ""
   );
+
+  const imageToShow =
+    userId === 1
+      ? userImage
+      : randomImages[Math.floor(Math.random() * randomImages.length)];
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -190,7 +201,7 @@ const Profile = () => {
     <SWrap>
       <SMainDiv>
         <SImgContainer>
-          <SImg src={userImage} alt="userImage" />
+          <SImg src={imageToShow} alt="userImage" />
           <label htmlFor="profile-image-upload">
             <SCameraIcon src={cameraIcon} alt="Change Profile Picture" />
           </label>
@@ -200,10 +211,12 @@ const Profile = () => {
             accept=".jpg, .jpeg, .png"
             style={{ display: "none" }}
           />
-          <SDiv>
-            <SLabelImg src={adminImg} alt="adminLabel" />
-            <SP>admin</SP>
-          </SDiv>
+          {userId === 1 && (
+            <SDiv>
+              <SLabelImg src={adminImg} alt="adminLabel" />
+              <SP>admin</SP>
+            </SDiv>
+          )}
         </SImgContainer>
         <SInfoContainer>
           <SInfoRow>
