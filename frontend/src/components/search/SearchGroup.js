@@ -4,10 +4,11 @@ import styled from "styled-components";
 
 //import recoil
 import { useRecoilState, useRecoilValue } from "recoil";
-import { selectedIdState, userDataState } from "../../recoil/SearchRecoil";
-
-//import component
-import Profile from "./information/Profile";
+import {
+  selectedIdState,
+  userDataState,
+  selectedMenuState,
+} from "../../recoil/SearchRecoil";
 
 const SearchGroup = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -15,6 +16,8 @@ const SearchGroup = () => {
   const [selectedId, setSelectedId] = useRecoilState(selectedIdState);
   const navigate = useNavigate();
   const userData = useRecoilValue(userDataState);
+
+  const [selectedMenu, setSelectedMenu] = useRecoilState(selectedMenuState);
 
   // 이름이 일치하는 사람 필터링
   const handleSearch = () => {
@@ -26,7 +29,7 @@ const SearchGroup = () => {
 
   const handleListItemClick = (id) => {
     setSelectedId(id);
-    navigate(`/profile/${id}`); // 해당 ID를 포함한 URL로 페이지 이동
+    setSelectedMenu(7);
   };
 
   // 엔터 키 입력 처리
