@@ -19,6 +19,7 @@ import SearchVacation from "./components/search/SearchVacation";
 import SearchWork from "./components/search/SearchWork";
 import SearchIn from "./components/search/SearchIn";
 import SearchOut from "./components/search/SearchOut";
+import Profile from "./components/search/information/Profile";
 
 const GlobalStyle = createGlobalStyle`
   ${normalize}
@@ -45,6 +46,7 @@ function App() {
         <Route path="/search/in" element={<SearchIn />} />
         <Route path="/search/out" element={<SearchOut />} />
         <Route path="/join" element={<JoinEmployeePage />} />
+        <Route path="/profile/:id" element={<Profile />} />
       </Routes>
       <ToastContainer />
     </Layout>

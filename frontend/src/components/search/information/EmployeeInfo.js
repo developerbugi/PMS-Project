@@ -1,20 +1,59 @@
 import React, { useState } from "react";
 import styled, { css } from "styled-components";
 
-const EmployeeInfo = () => {
-  const [email, setEmail] = useState("abcd1234@naver.com");
-  const [address, setAddress] = useState("서울시 강남구 123-45");
-  const [isJoin, setIsJoin] = useState("2024-02-06");
-  const [joinIn, setJoinIn] = useState("2024-02-06");
-  const [joinOut, setJoinOut] = useState("-");
-  const [education, setEducation] = useState("학사");
-  const [major, setMajor] = useState("컴퓨터공학");
-  const [army, setArmy] = useState("N");
-  const [etc, setEtc] = useState("-");
+//import recoil
+import { useRecoilValue } from "recoil";
+import { userDataState, selectedIdState } from "../../../recoil/SearchRecoil";
 
-  //여기 추가해야돼!!!!!!!!!!!!!!!!!!
+const EmployeeInfo = () => {
+  const userId = useRecoilValue(selectedIdState);
+  const userData = useRecoilValue(userDataState).find(
+    (user) => user.id === userId
+  );
+
+  const [email, setEmail] = useState(userData.email);
+  const [address, setAddress] = useState(userData.address);
+  const [isJoin, setIsJoin] = useState(userData.isJoin);
+  const [joinIn, setJoinIn] = useState(userData.joinIn);
+  const [joinOut, setJoinOut] = useState(userData.joinOut);
+  const [education, setEducation] = useState(userData.education);
+  const [major, setMajor] = useState(userData.major);
+  const [army, setArmy] = useState(userData.army);
+  const [etc, setEtc] = useState(userData.etc);
+
   const handleInputChange = (e) => {
-    setEmail(e.target.value);
+    const { email, value } = e.target;
+    switch (email) {
+      case "email":
+        setEmail(value);
+        break;
+      case "address":
+        setAddress(value);
+        break;
+      case "isJoin":
+        setIsJoin(value);
+        break;
+      case "joinIn":
+        setJoinIn(value);
+        break;
+      case "joinOut":
+        setJoinOut(value);
+        break;
+      case "education":
+        setEducation(value);
+        break;
+      case "major":
+        setMajor(value);
+        break;
+      case "army":
+        setArmy(value);
+        break;
+      case "etc":
+        setEtc(value);
+        break;
+      default:
+        break;
+    }
   };
 
   return (

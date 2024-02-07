@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import styled, { css } from "styled-components";
+import { useRecoilValue } from "recoil";
+import { userDataState, selectedIdState } from "../../../recoil/SearchRecoil";
 
 //import image
 import cameraIcon from "../../../assets/img/camera_enhance.svg";
@@ -133,17 +135,55 @@ const SInput = styled.input`
 `;
 
 const Profile = () => {
-  const [name, setName] = useState("정지은");
-  const [englishName, setEnglishName] = useState("JiEun Jeung");
-  const [employeeId, setEmployeeId] = useState("20240206");
-  const [department, setDepartment] = useState("인사부");
-  const [position, setPosition] = useState("대리");
-  const [ssn, setSSN] = useState("980819-1111111");
-  const [phoneNumber, setPhoneNumber] = useState("010-0000-0000");
+  const userId = useRecoilValue(selectedIdState);
+  const userData = useRecoilValue(userDataState).find(
+    (user) => user.id === userId
+  );
 
-  //여기 추가해야돼!!!!!!!!!!!!!!!!!!
+  // 초기값 설정
+  const [name, setName] = useState(userData.name);
+  const [englishName, setEnglishName] = useState(
+    userData ? userData.englishName : ""
+  );
+  const [employeeId, setEmployeeId] = useState(
+    userData ? userData.employeeId : ""
+  );
+  const [department, setDepartment] = useState(
+    userData ? userData.department : ""
+  );
+  const [position, setPosition] = useState(userData ? userData.position : "");
+  const [ssn, setSSN] = useState(userData ? userData.ssn : "");
+  const [phoneNumber, setPhoneNumber] = useState(
+    userData ? userData.phoneNumber : ""
+  );
+
   const handleInputChange = (e) => {
-    setName(e.target.value);
+    const { name, value } = e.target;
+    switch (name) {
+      case "name":
+        setName(value);
+        break;
+      case "englishName":
+        setEnglishName(value);
+        break;
+      case "employeeId":
+        setEmployeeId(value);
+        break;
+      case "department":
+        setDepartment(value);
+        break;
+      case "position":
+        setPosition(value);
+        break;
+      case "ssn":
+        setSSN(value);
+        break;
+      case "phoneNumber":
+        setPhoneNumber(value);
+        break;
+      default:
+        break;
+    }
   };
 
   return (
