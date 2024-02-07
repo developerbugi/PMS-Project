@@ -79,22 +79,24 @@ const SearchVacation = () => {
     }
 
     return (
-      <Calendar>
-        <MonthHeader>
-          <PrevButton onClick={handlePrevMonth}>&lt;</PrevButton>
-          <MonthName>
-            {startDate.toLocaleString("default", { month: "long" })}{" "}
-            {startDate.getFullYear()}
-          </MonthName>
-          <NextButton onClick={handleNextMonth}>&gt;</NextButton>
-        </MonthHeader>
-        {daysInMonth}
-      </Calendar>
+      <SWrap>
+        <Calendar>
+          <MonthHeader>
+            <PrevButton onClick={handlePrevMonth}>&lt;</PrevButton>
+            <MonthName>
+              {startDate.toLocaleString("default", { month: "long" })}{" "}
+              {startDate.getFullYear()}
+            </MonthName>
+            <NextButton onClick={handleNextMonth}>&gt;</NextButton>
+          </MonthHeader>
+          <SDiv>{daysInMonth}</SDiv>
+        </Calendar>
+      </SWrap>
     );
   };
 
   return (
-    <div>
+    <SWrap>
       <h2>휴가 기록</h2>
       {renderCalendar()}
       {showInput && (
@@ -116,9 +118,21 @@ const SearchVacation = () => {
           </RecordItem>
         ))}
       </VacationRecord>
-    </div>
+    </SWrap>
   );
 };
+
+const SDiv = styled.div`
+  display: flex;
+`;
+
+const SWrap = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 100%;
+`;
 
 const Calendar = styled.div`
   display: grid;
@@ -129,10 +143,12 @@ const Calendar = styled.div`
 const Day = styled.div`
   padding: 10px;
   text-align: center;
+  font-size: 1.3rem;
+  font-weight: 700;
   background-color: ${({ submitted }) => (submitted ? "#007bff" : "#f0f0f0")};
   color: ${({ submitted }) => (submitted ? "#fff" : "#000")};
   cursor: pointer;
-  border-radius: 50%;
+  border-radius: 1rem;
 `;
 
 const EmptyDay = styled.div`
@@ -141,7 +157,8 @@ const EmptyDay = styled.div`
 
 const MonthHeader = styled.div`
   display: flex;
-  justify-content: space-between;
+  flex-direction: row;
+  justify-content: center;
   align-items: center;
   margin-bottom: 10px;
 `;
