@@ -8,17 +8,17 @@ import { userDataState, selectedIdState } from "../../../recoil/SearchRecoil";
 const EmployeeInfo = () => {
   const userId = useRecoilValue(selectedIdState);
   const userData = useRecoilValue(userDataState).find(
-    (user) => user.id === userId
+    (user) => user.com_id === userId
   );
 
-  const [email, setEmail] = useState(userData.email);
+  const [email, setEmail] = useState(userData.emp_email);
   const [address, setAddress] = useState(userData.address);
-  const [isJoin, setIsJoin] = useState(userData.isJoin);
-  const [joinIn, setJoinIn] = useState(userData.joinIn);
-  const [joinOut, setJoinOut] = useState(userData.joinOut);
-  const [education, setEducation] = useState(userData.education);
+  const [isJoin, setIsJoin] = useState(userData.emp_type);
+  const [joinIn, setJoinIn] = useState(userData.emp_hiredate);
+  const [joinOut, setJoinOut] = useState(userData.emp_tmndate);
+  const [education, setEducation] = useState(userData.final_edu);
   const [major, setMajor] = useState(userData.major);
-  const [army, setArmy] = useState(userData.army);
+  const [army, setArmy] = useState(userData.military);
   const [etc, setEtc] = useState(userData.etc);
 
   const handleInputChange = (e) => {

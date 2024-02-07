@@ -7,6 +7,7 @@ import { userDataState, selectedIdState } from "../../../recoil/SearchRecoil";
 import cameraIcon from "../../../assets/img/camera_enhance.svg";
 import userImage from "../../../assets/img/logo.png";
 import adminImg from "../../../assets/img/admin_label.svg";
+import empImg from "../../../assets/img/sbimg.svg";
 import EmployeeInfo from "./EmployeeInfo";
 import random1 from "../../../assets/img/leaves-8517219_1280.jpg";
 import random2 from "../../../assets/img/squirrel-8536537_1280.jpg";
@@ -39,6 +40,13 @@ const SImg = styled.img`
 const SP = styled.div`
   margin-top: 0;
   margin-left: 1.2rem;
+  font-size: 1.4rem;
+  font-weight: 700;
+`;
+
+const SSP = styled.div`
+  margin-top: 0;
+  margin-left: 4rem;
   font-size: 1.4rem;
   font-weight: 700;
 `;
@@ -143,24 +151,20 @@ const randomImages = [random1, random2, random3];
 const Profile = () => {
   const userId = useRecoilValue(selectedIdState);
   const userData = useRecoilValue(userDataState).find(
-    (user) => user.id === userId
+    (user) => user.com_id === userId
   );
 
   // 초기값 설정
-  const [name, setName] = useState(userData.name);
+  const [name, setName] = useState(userData.name_kor);
   const [englishName, setEnglishName] = useState(
-    userData ? userData.englishName : ""
+    userData ? userData.name_eng : ""
   );
-  const [employeeId, setEmployeeId] = useState(
-    userData ? userData.employeeId : ""
-  );
-  const [department, setDepartment] = useState(
-    userData ? userData.department : ""
-  );
-  const [position, setPosition] = useState(userData ? userData.position : "");
-  const [ssn, setSSN] = useState(userData ? userData.ssn : "");
+  const [id, setEmployeeId] = useState(userData ? userData.com_id : "");
+  const [department, setDepartment] = useState(userData ? userData.dep : "");
+  const [position, setPosition] = useState(userData ? userData.rank_name : "");
+  const [ssn, setSSN] = useState(userData ? userData.rrn : "");
   const [phoneNumber, setPhoneNumber] = useState(
-    userData ? userData.phoneNumber : ""
+    userData ? userData.mob_num : ""
   );
 
   const imageToShow =
@@ -177,7 +181,7 @@ const Profile = () => {
       case "englishName":
         setEnglishName(value);
         break;
-      case "employeeId":
+      case "id":
         setEmployeeId(value);
         break;
       case "department":
@@ -211,10 +215,15 @@ const Profile = () => {
             accept=".jpg, .jpeg, .png"
             style={{ display: "none" }}
           />
-          {userId === 1 && (
+          {userId === 1 ? (
             <SDiv>
               <SLabelImg src={adminImg} alt="adminLabel" />
               <SP>admin</SP>
+            </SDiv>
+          ) : (
+            <SDiv>
+              <SLabelImg src={empImg} alt="empImg" />
+              <SP>{id}</SP>
             </SDiv>
           )}
         </SImgContainer>
@@ -243,15 +252,6 @@ const Profile = () => {
             </SItem>
           </SInfoRow>
           <SInfoRow>
-            <SItem>
-              <SSPan>사번</SSPan>
-              <SInput
-                type="text"
-                value={employeeId}
-                onChange={(e) => setEmployeeId(e.target.value)}
-                hasValue={employeeId.length > 0}
-              />
-            </SItem>
             <SItem>
               <SSPan>부서</SSPan>
               <SInput

@@ -22,13 +22,13 @@ const SearchGroup = () => {
   // 이름이 일치하는 사람 필터링
   const handleSearch = () => {
     const results = userData.filter((person) =>
-      person.name.toLowerCase().includes(searchTerm.toLowerCase())
+      person.name_eng.toLowerCase().includes(searchTerm.toLowerCase())
     );
     setSearchResults(results);
   };
 
-  const handleListItemClick = (id) => {
-    setSelectedId(id);
+  const handleListItemClick = (com_id) => {
+    setSelectedId(com_id);
     setSelectedMenu(7);
   };
 
@@ -63,13 +63,13 @@ const SearchGroup = () => {
           </SListItemHeader>
           {searchResults.map((person) => (
             <SListItem
-              key={person.id}
-              onClick={() => handleListItemClick(person.id)}
+              key={person.com_id}
+              onClick={() => handleListItemClick(person.com_id)}
             >
-              <div>{person.id}</div>
-              <div>{person.name}</div>
-              <div>{person.department}</div>
-              <div>{person.position}</div>
+              <div>{person.com_id}</div>
+              <div>{person.name_kor}</div>
+              <div>{person.dep}</div>
+              <div>{person.rank_name}</div>
             </SListItem>
           ))}
         </SSearchResults>
