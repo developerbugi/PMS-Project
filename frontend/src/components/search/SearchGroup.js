@@ -1,88 +1,32 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+
+//import recoil
+import { useRecoilState, useRecoilValue } from "recoil";
+import { selectedIdState, userDataState } from "../../recoil/SearchRecoil";
+
+//import component
+import Profile from "./information/Profile";
 
 const SearchGroup = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
-
-  // dummy Data
-  // 사번 이름 부서 직급
-  const dummyData = [
-    { id: 1234, name: "정지은", department: "인사부", position: "대리" },
-    {
-      id: 2222,
-      name: "홍길동",
-      department: "IT기획",
-      position: "사원",
-    },
-    {
-      id: 3333,
-      name: "홍홍홍",
-      department: "IT기획",
-      position: "사원",
-    },
-    {
-      id: 4444,
-      name: "길길길",
-      department: "IT기획",
-      position: "팀장",
-    },
-    {
-      id: 5555,
-      name: "캬캬캬",
-      department: "마케팅",
-      position: "대리",
-    },
-    {
-      id: 6666,
-      name: "쿄쿄쿄",
-      department: "영업부",
-      position: "사원",
-    },
-    {
-      id: 6777,
-      name: "쿄쿄쿄",
-      department: "영업부",
-      position: "사원",
-    },
-    {
-      id: 6888,
-      name: "쿄쿄쿄",
-      department: "영업부",
-      position: "사원",
-    },
-    {
-      id: 6999,
-      name: "쿄쿄쿄",
-      department: "영업부",
-      position: "사원",
-    },
-    {
-      id: 6000,
-      name: "쿄쿄쿄",
-      department: "영업부",
-      position: "사원",
-    },
-    {
-      id: 6234,
-      name: "쿄쿄쿄",
-      department: "영업부",
-      position: "사원",
-    },
-    {
-      id: 6123,
-      name: "쿄쿄쿄",
-      department: "영업부",
-      position: "사원",
-    },
-  ];
+  const [selectedId, setSelectedId] = useRecoilState(selectedIdState);
+  const navigate = useNavigate();
+  const userData = useRecoilValue(userDataState);
 
   // 이름이 일치하는 사람 필터링
   const handleSearch = () => {
-    const results = dummyData.filter((person) =>
+    const results = userData.filter((person) =>
       person.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
     setSearchResults(results);
+  };
+
+  const handleListItemClick = (id) => {
+    setSelectedId(id);
+    navigate(`/profile/${id}`); // 해당 ID를 포함한 URL로 페이지 이동
   };
 
   // 엔터 키 입력 처리
@@ -115,7 +59,10 @@ const SearchGroup = () => {
             <div>직급</div>
           </SListItemHeader>
           {searchResults.map((person) => (
-            <SListItem key={person.id}>
+            <SListItem
+              key={person.id}
+              onClick={() => handleListItemClick(person.id)}
+            >
               <div>{person.id}</div>
               <div>{person.name}</div>
               <div>{person.department}</div>
@@ -141,7 +88,7 @@ const SListItemHeader = styled.div`
   margin-bottom: 0.5rem;
   background-color: #91b7ff;
   border-radius: 0.5rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add box shadow for depth */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   font-weight: 800;
   font-size: 1.4rem;
 
@@ -210,14 +157,14 @@ const SListItem = styled.div`
   padding: 0.5rem;
   margin-bottom: 0.5rem;
   font-size: 1.2rem;
-  background-color: #f9f9f9; /* Add background color */
-  border-radius: 0.5rem; /* Add border radius for rounded corners */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add box shadow for depth */
-  transition: all 0.3s ease; /* Add transition for smooth hover effect */
+  background-color: #f9f9f9;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
 
   &:hover {
-    transform: translateY(-2px); /* Add slight lift effect on hover */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Enhance box shadow on hover */
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   }
 
   > div {
