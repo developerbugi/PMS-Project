@@ -10,6 +10,11 @@ export const selectedIdState = atom({
   default: 1,
 });
 
+export const selectedMenuState = atom({
+  key: "selectedMenuState",
+  default: 1,
+});
+
 export const userDataState = atom({
   key: "userDataState",
   default: [
