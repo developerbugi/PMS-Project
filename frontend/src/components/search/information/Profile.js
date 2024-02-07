@@ -137,6 +137,7 @@ const SInput = styled.input`
     `}
 `;
 
+//랜덤값
 const randomImages = [random1, random2, random3];
 
 const Profile = () => {
