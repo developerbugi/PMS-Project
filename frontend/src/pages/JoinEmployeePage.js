@@ -13,33 +13,39 @@ const JoinEmployeePage = () => {
     navigate("/give");
   };
 
+  
 
-  const [formData, setFormData] = useState({
-    name: "",
-    englishName: "",
-    ssn: "",
-    employeeNumber: "",
-    department: "",
-    phoneNumber: "",
-    position: "",
-    major: "",
-    highestLevel: "",
-    employmentType: "",
-    firstDay: "",
-    lastDay: "",
-    email: "",
-    military: "",
-    address: "",
+  const [employee, setEmployee] = useState({
+    name_kor: "", //이름
+    name_eng: "", //영문이름
+    rrn: "", //주민등록번호
+    com_id: "", //사번
+    dep_id: "", //부서
+    mob_num: "", //휴대폰번호
+    rank_id: "", //직급
+    major: "", //전공
+    final_edu: "", //최종학력
+    emp_type: "", //입사구분
+    emp_hiredate: "", //입사일
+    email   : "", //이메일
+    military: "", //군필
+    address: "", //주소
   });
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
+  const handleInputChange = (event) => {
+    setEmployee({
+      ...employee,
+      [event.target.name]: event.target.value,
+    });
   };
 
+  /*<Button 
+    onClick={navigateToGive}
+    style = 
+    {{
+      marginLeft : '5px'
+    }}
+    >사번 부여</Button>  */
 
   return (
     <SWrap>
@@ -48,17 +54,12 @@ const JoinEmployeePage = () => {
         <main>
           <Row className="first-row">
           <Header>
-          <h1>사원 등록 시스템</h1>
+          <h1>사원 등록</h1>
           </Header>
             <ControlButtons >
               <Button>저장</Button>
-              <Button 
-              onClick={navigateToGive}
-              style = 
-              {{
-                marginLeft : '5px'
-              }}
-              >사번 부여</Button>   
+              
+                
             </ControlButtons>
           </Row>
 
@@ -78,7 +79,7 @@ const JoinEmployeePage = () => {
             />
             <div>
               <Row style = {{marginLeft : '10px'}}>
-                <label htmlFor="name"
+                <label htmlFor="name_kor"
                 style = {{
                   width :'70px',
                   textAlign: 'center'
@@ -86,14 +87,14 @@ const JoinEmployeePage = () => {
                 >이름 : </label>
                 <InputField
                   type="text"
-                  id="name"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleChange}
+                  id="name_kor"
+                  name="name_kor"
+                  value={employee.name_kor}
+                  onChange={handleInputChange}
                   style = {{maxWidth :'100px'}}
                 />
 
-                <label htmlFor="englishName"
+                <label htmlFor="name_eng"
                 style = {{
                   width :'70px',
                   marginLeft : '10px',
@@ -102,14 +103,14 @@ const JoinEmployeePage = () => {
                 >영문이름 : </label>
                 <InputField
                   type="text"
-                  id="englishName"
-                  name="englishName"
-                  value={formData.englishName}
-                  onChange={handleChange}
+                  id="name_eng"
+                  name="name_eng"
+                  value={employee.name_eng}
+                  onChange={handleInputChange}
                   style = {{maxWidth :'100px'}}
                 />
 
-                <label htmlFor="ssn"
+                <label htmlFor="rrn"
                 style = {{
                   width :'70px',
                   marginLeft : '10px',
@@ -118,15 +119,16 @@ const JoinEmployeePage = () => {
                 >주민번호 :</label>
                 <InputField
                   type="text"
-                  id="ssn"
-                  name="ssn"
-                  value={formData.ssn}
-                  onChange={handleChange}
+                  id="rrn"
+                  name="rrn"
+                  value={employee.rrn}
+                  onChange={handleInputChange}
+                  placeholder="앞자리 6자리"
                   style = {{maxWidth :'100px'}}
                 />
               </Row>
               <Row style = {{marginLeft : '10px'}}>
-                <label htmlFor="employeeNumber"
+                <label htmlFor="com_id"
                 style = {{
                   width :'70px',
                   textAlign: 'center'
@@ -134,14 +136,14 @@ const JoinEmployeePage = () => {
                 >사번 :</label>
                 <InputField
                   type="text"
-                  id="employeeNumber"
-                  name="employeeNumber"
-                  value={formData.employeeNumber}
-                  onChange={handleChange}
+                  id="com_id"
+                  name="com_id"
+                  value={employee.com_id}
+                  onChange={handleInputChange}
                   style = {{maxWidth :'100px'}}
                 />
 
-                <label htmlFor="department"
+                <label htmlFor="dep_id"
                 style = {{
                   width :'70px',
                   marginLeft : '10px',
@@ -150,14 +152,14 @@ const JoinEmployeePage = () => {
                 >부서 :</label>
                 <InputField
                   type="text"
-                  id="department"
-                  name="department"
-                  value={formData.department}
-                  onChange={handleChange}
+                  id="dep_id"
+                  name="dep_id"
+                  value={employee.dep_id}
+                  onChange={handleInputChange}
                   style = {{maxWidth :'100px'}}
                 />
 
-                <label htmlFor="phoneNumber"
+                <label htmlFor="mob_num"
                 style = {{
                   width :'70px',
                   marginLeft : '10px',
@@ -166,17 +168,18 @@ const JoinEmployeePage = () => {
                 >휴대폰번호 :</label>
                 <InputField
                   type="text"
-                  id="phoneNumber"
-                  name="phoneNumber"
-                  value={formData.phoneNumber}
-                  onChange={handleChange}
+                  id="mob_num"
+                  name="mob_num"
+                  value={employee.mob_num}
+                  onChange={handleInputChange}
+                  placeholder="010-xxxx-xxxx"
                   style = {{maxWidth :'100px'}}
                 />
               </Row>
             </div>
             </div>
             <Row style = {{marginTop : '20px'}}>
-              <label htmlFor="position"
+              <label htmlFor="rank_id"
               style = {{
                 width :'70px',
                 textAlign: 'center'
@@ -184,10 +187,10 @@ const JoinEmployeePage = () => {
               >직급 :</label>
               <InputField
                 type="text"
-                id="position"
-                name="position"
-                value={formData.position}
-                onChange={handleChange}
+                id="rank_id"
+                name="rank_id"
+                value={employee.rank_id}
+                onChange={handleInputChange}
                 style = {{maxWidth :'150px'}}
               />
 
@@ -202,12 +205,12 @@ const JoinEmployeePage = () => {
                 type="text"
                 id="major"
                 name="major"
-                value={formData.major}
-                onChange={handleChange}
+                value={employee.major}
+                onChange={handleInputChange}
                 style = {{maxWidth :'150px'}}
               />
 
-              <label htmlFor="highestLevel"
+              <label htmlFor="final_edu"
               style = {{
                 width :'70px',
                 marginLeft : '20px',
@@ -216,16 +219,16 @@ const JoinEmployeePage = () => {
                 >최종학력 :</label>
               <InputField
                 type="text"
-                id="highestLevel"
-                name="highestLevel"
-                value={formData.highestLevel}
-                onChange={handleChange}
+                id="final_edu"
+                name="final_edu"
+                value={employee.final_edu}
+                onChange={handleInputChange}
                 style = {{maxWidth :'150px'}}
               />
             </Row>
 
             <Row style = {{marginTop : '20px'}}>
-              <label htmlFor="employmentType"
+              <label htmlFor="emp_type"
               style = {{
                 width :'70px',
                 textAlign: 'center'
@@ -233,14 +236,14 @@ const JoinEmployeePage = () => {
               >입사구분 :</label>
               <InputField
                 type="text"
-                id="employmentType"
-                name="employmentType"
-                value={formData.employmentType}
-                onChange={handleChange}
+                id="emp_type"
+                name="emp_type"
+                value={employee.emp_type}
+                onChange={handleInputChange}
                 style = {{maxWidth :'150px'}}
               />
-
-              <label htmlFor="firstDay"
+              
+              <label htmlFor="emp_hiredate"
               style = {{
                 width :'70px',
                 marginLeft : '20px',
@@ -248,48 +251,16 @@ const JoinEmployeePage = () => {
                 }}
                 >입사일 :</label>
               <InputField
-                type="text"
-                id="firstDay"
-                name="firstDay"
-                value={formData.firstDay}
-                onChange={handleChange}
+                type="date"
+                id="emp_hiredate"
+                name="emp_hiredate"
+                value={employee.emp_hiredate}
+                onChange={handleInputChange}
                 style = {{maxWidth :'150px'}}
-              />
-
-              <label htmlFor="lastDay"
-              style = {{
-                width :'70px',
-                marginLeft : '20px',
-                textAlign: 'center'
-                }}
-                >퇴사일 :</label>
-              <InputField
-                type="text"
-                id="lastDay"
-                name="lastDay"
-                value={formData.lastDay}
-                onChange={handleChange}
-                style = {{maxWidth :'150px'}}
-              />
-            </Row>
-            <Row>
-              <label htmlFor="email"
-              style = {{
-                width :'70px',
-                textAlign: 'center'
-                }}>
-                  이메일 :</label>
-              <InputField
-                type="text"
-                id="email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                style = {{maxWidth :'390px'}}
               />
 
               <label htmlFor="military"
-              style = {{
+                style = {{
                 width :'70px',
                 marginLeft : '20px',
                 textAlign: 'center'
@@ -299,10 +270,26 @@ const JoinEmployeePage = () => {
                 type="text"
                 id="military"
                 name="military"
-                value={formData.department}
-                onChange={handleChange}
+                value={employee.department}
+                onChange={handleInputChange}
                 style = {{maxWidth :'150px'}}
               />
+            </Row>
+            <Row>
+              <label htmlFor="email"
+              style = {{
+                width :'55px',
+                textAlign: 'center'
+                }}>
+                  이메일 :</label>
+              <InputField
+                type="text"
+                id="email"
+                name="email"
+                value={employee.email}
+                onChange={handleInputChange}
+              />
+ 
             </Row>
             <Row>
               <label htmlFor="address"
@@ -314,8 +301,8 @@ const JoinEmployeePage = () => {
                 type="text"
                 id="address"
                 name="address"
-                value={formData.address}
-                onChange={handleChange}
+                value={employee.address}
+                onChange={handleInputChange}
               />
             </Row>
           </div>
@@ -359,7 +346,7 @@ const Header = styled.header`
 const Row = styled.div`
 
   display: flex;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 
   &.first-row {
     display: flex;
@@ -390,6 +377,11 @@ const InputField = styled.input`
   border: 1px solid #ccc;
   border-radius: 4px;
   width: 100%;
+
+  &:focus {
+    border-color: #699CFF;  
+    outline: none;  
+  }
 `;
 
 const TextAreaField = styled.textarea`
