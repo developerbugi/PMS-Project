@@ -42,7 +42,7 @@ public class exitEmployee extends HttpServlet {
             response.getWriter().write("정상적으로 퇴사처리 되었습니다.");
         }else{
             response.setContentType("text/plain;charset=UTF-8");
-            response.getWriter().write("정상적으로 퇴사처리 되었습니다.");
+            response.getWriter().write("퇴사 처리에 실패하였습니다.");
         }
     }
 }

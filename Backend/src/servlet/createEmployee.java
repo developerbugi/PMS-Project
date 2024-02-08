@@ -43,6 +43,7 @@ public class createEmployee extends HttpServlet {
         String major = employeeData.getMajor();
         String dep_id = employeeData.getDep_id();
         String rank_id = employeeData.getRank_id();
+        String etc = employeeData.getEtc();
 
 
 
@@ -54,7 +55,7 @@ public class createEmployee extends HttpServlet {
                 "",mob_num,"",
                 rrn,emp_email,military,
                 final_edu,major, "12",
-                "12",dep_id, rank_id,"");
+                "12",dep_id, rank_id,etc);
 
         // 응답 처리
         if (result.equals("추가성공")){

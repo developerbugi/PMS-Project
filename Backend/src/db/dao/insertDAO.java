@@ -54,7 +54,7 @@ public class insertDAO {
                     ptstm.setString(16, sick_leave);
                     ptstm.setString(17, dep_id);
                     ptstm.setString(18, rank_id);
-                    ptstm.setString(19, null);
+                    ptstm.setString(19, etc);
                     ptstm.executeUpdate();
 
                     Statement state = conn.createStatement();
