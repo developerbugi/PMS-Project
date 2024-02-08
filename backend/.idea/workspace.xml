@@ -9,13 +9,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3042a13c-1508-4eb4-8b03-642a3b4c0e84" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/servlet/ExitEmployee.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/servlet/InsertServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/servlet/createEmployee.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/servlet/SearchServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/servlet/researchMemberAll.java" afterDir="false" />
-    </list>
+    <list default="true" id="3042a13c-1508-4eb4-8b03-642a3b4c0e84" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -207,7 +201,7 @@
       <workItem from="1707329168378" duration="500000" />
       <workItem from="1707364782963" duration="2151000" />
       <workItem from="1707367093993" duration="477000" />
-      <workItem from="1707371630835" duration="719000" />
+      <workItem from="1707371630835" duration="1117000" />
     </task>
     <servers />
   </component>
