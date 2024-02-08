@@ -13,9 +13,10 @@ public class EmployeeData {
     private String military;
     private String final_edu;
     private String major;
-
     private String dep_id;
     private String rank_id;
+
+    private String etc;
 
     public String getCom_id() {
         return com_id;
@@ -47,6 +48,14 @@ public class EmployeeData {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public String getEtc() {
+        return etc;
+    }
+
+    public void setEtc(String etc) {
+        this.etc = etc;
     }
 
     public String getEmp_type() {

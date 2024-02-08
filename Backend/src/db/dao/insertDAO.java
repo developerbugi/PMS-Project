@@ -17,11 +17,6 @@ public class insertDAO {
         //사원 추가 SQL
         String SQL2 = "insert into employees values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
-        /*
-        String year = String.valueOf(java.time.Year.now().getValue()).substring(2);
-        String uniqueNumber = UUID.randomUUID().toString().substring(0, 4);
-        String new_id = year + uniqueNumber;
-        */
 
         try {
             Connection conn = Connection_DB.GetDB();
@@ -33,7 +28,7 @@ public class insertDAO {
 
             if(rs.next()) {
                 ptstn.close();
-                return "사번 중복";
+                return "사번중복";
             }
 
             else {
@@ -59,7 +54,7 @@ public class insertDAO {
                     ptstm.setString(16, sick_leave);
                     ptstm.setString(17, dep_id);
                     ptstm.setString(18, rank_id);
-                    ptstm.setString(19, etc);
+                    ptstm.setString(19, null);
                     ptstm.executeUpdate();
 
                     Statement state = conn.createStatement();
