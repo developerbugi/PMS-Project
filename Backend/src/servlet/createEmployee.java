@@ -12,7 +12,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 
 @WebServlet("/api/join")
-public class InsertServlet extends HttpServlet {
+public class createEmployee extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

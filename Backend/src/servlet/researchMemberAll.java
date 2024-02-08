@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 @WebServlet("/employees/all")
-public class SearchServlet extends HttpServlet {
+public class researchMemberAll extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         selectDAO dao = new selectDAO();
         String result = dao.SearchEmployees();
