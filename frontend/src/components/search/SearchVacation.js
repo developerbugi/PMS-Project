@@ -1,221 +1,235 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { useRecoilState } from "recoil";
+
+//import recoil
+import { userVacationState } from "../../recoil/SearchRecoil";
 
 const SearchVacation = () => {
-  const [currentDate, setCurrentDate] = useState(new Date());
+  const [date, setDate] = useState(new Date());
   const [selectedDate, setSelectedDate] = useState(null);
-  const [showInput, setShowInput] = useState(false);
-  const [vacationReason, setVacationReason] = useState("");
-  const [vacationRecord, setVacationRecord] = useState({});
-  const [submittedDates, setSubmittedDates] = useState([]);
 
-  const handlePrevMonth = () => {
-    const prevMonth = new Date(
-      currentDate.getFullYear(),
-      currentDate.getMonth() - 1,
-      1
-    );
-    setCurrentDate(prevMonth);
+  //입력폼
+  const [formData, setFormData] = useState({
+    name: "",
+    year: "",
+    month: "",
+    day: "",
+    reason: "",
+  });
+
+  const [userVacation, setUserVacation] = useRecoilState(userVacationState);
+
+  const daysInMonth = (year, month) => {
+    return new Date(year, month + 1, 0).getDate();
   };
 
-  const handleNextMonth = () => {
-    const nextMonth = new Date(
-      currentDate.getFullYear(),
-      currentDate.getMonth() + 1,
-      1
-    );
-    setCurrentDate(nextMonth);
+  const firstDayOfMonth = () => {
+    return new Date(date.getFullYear(), date.getMonth(), 1).getDay();
   };
 
-  const handleDateClick = (date) => {
-    setSelectedDate(date);
-    setShowInput(true);
+  const handleDateClick = (day) => {
+    setSelectedDate(day);
+    setFormData({
+      ...formData,
+      year: String(date.getFullYear()),
+      month: String(date.getMonth() + 1).padStart(2, "0"),
+      day: String(day).padStart(2, "0"),
+    });
   };
 
   const handleInputChange = (e) => {
-    setVacationReason(e.target.value);
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
   };
 
-  const handleSubmit = () => {
-    if (selectedDate && vacationReason.trim() !== "") {
-      setVacationRecord({
-        ...vacationRecord,
-        [selectedDate]: vacationReason.trim(),
-      });
-      setSubmittedDates([...submittedDates, selectedDate]);
-    }
-    setShowInput(false);
+  const handleSave = () => {
+    const newData = {
+      id: userVacation.length + 1,
+      ...formData,
+    };
+    setUserVacation([...userVacation, newData]);
+    setFormData({
+      name: "",
+      year: "",
+      month: "",
+      day: "",
+      reason: "",
+    });
   };
 
   const renderCalendar = () => {
-    const daysInMonth = [];
-    const startDate = new Date(
-      currentDate.getFullYear(),
-      currentDate.getMonth(),
-      1
-    );
-    const endDate = new Date(
-      currentDate.getFullYear(),
-      currentDate.getMonth() + 1,
-      0
-    );
-    const startDay = startDate.getDay();
+    const days = [];
+    const totalDays = daysInMonth(date.getFullYear(), date.getMonth());
+    const firstDay = firstDayOfMonth();
 
-    for (let i = 0; i < startDay; i++) {
-      daysInMonth.push(<EmptyDay key={`empty-${i}`} />);
+    for (let i = 0; i < firstDay; i++) {
+      days.push(<div key={`empty${i}`} />);
     }
 
-    for (let date = 1; date <= endDate.getDate(); date++) {
-      const isSubmitted = submittedDates.includes(date);
-      daysInMonth.push(
-        <Day
-          key={date}
-          onClick={() => handleDateClick(date)}
-          submitted={isSubmitted}
-        >
-          {date}
-        </Day>
+    for (let i = 1; i <= totalDays; i++) {
+      days.push(
+        <CalendarDate key={`day${i}`} onClick={() => handleDateClick(i)}>
+          {i}
+        </CalendarDate>
       );
     }
 
-    return (
-      <SWrap>
-        <Calendar>
-          <MonthHeader>
-            <PrevButton onClick={handlePrevMonth}>&lt;</PrevButton>
-            <MonthName>
-              {startDate.toLocaleString("default", { month: "long" })}{" "}
-              {startDate.getFullYear()}
-            </MonthName>
-            <NextButton onClick={handleNextMonth}>&gt;</NextButton>
-          </MonthHeader>
-          <SDiv>{daysInMonth}</SDiv>
-        </Calendar>
-      </SWrap>
-    );
+    return days;
   };
 
   return (
-    <SWrap>
-      <h2>휴가 기록</h2>
-      {renderCalendar()}
-      {showInput && (
-        <InputContainer>
-          <InputLabel>날짜: {selectedDate}</InputLabel>
-          <InputField
+    <CalendarContainer>
+      <CalendarHeader>
+        <SButton
+          onClick={() =>
+            setDate(new Date(date.getFullYear(), date.getMonth() - 1, 1))
+          }
+        >
+          이전
+        </SButton>
+        <SHeaderTitle>{`${date.getFullYear()}년 ${
+          date.getMonth() + 1
+        }월`}</SHeaderTitle>
+        <SButton
+          onClick={() =>
+            setDate(new Date(date.getFullYear(), date.getMonth() + 1, 1))
+          }
+        >
+          다음
+        </SButton>
+      </CalendarHeader>
+      <CalendarBody>
+        <SDayDiv>일</SDayDiv>
+        <SDayDiv>월</SDayDiv>
+        <SDayDiv>화</SDayDiv>
+        <SDayDiv>수</SDayDiv>
+        <SDayDiv>목</SDayDiv>
+        <SDayDiv>금</SDayDiv>
+        <SDayDiv>토</SDayDiv>
+        {renderCalendar()}
+      </CalendarBody>
+      {selectedDate !== null && (
+        <RecordInput>
+          <h3>{`${date.getFullYear()}년 ${
+            date.getMonth() + 1
+          }월 ${selectedDate}일`}</h3>
+          <input
             type="text"
-            placeholder="휴가 사유를 입력하세요."
+            name="name"
+            placeholder="사원 이름"
+            value={formData.name}
             onChange={handleInputChange}
           />
-          <SubmitButton onClick={handleSubmit}>제출</SubmitButton>
-        </InputContainer>
+          <input
+            type="text"
+            name="year"
+            placeholder="년"
+            value={formData.year}
+            readOnly
+          />
+          <input
+            type="text"
+            name="month"
+            placeholder="월"
+            value={formData.month}
+            readOnly
+          />
+          <input
+            type="text"
+            name="day"
+            placeholder="일"
+            value={formData.day}
+            readOnly
+          />
+          <input
+            type="text"
+            name="reason"
+            placeholder="사유"
+            value={formData.reason}
+            onChange={handleInputChange}
+          />
+          <RecordButton onClick={handleSave}>저장</RecordButton>
+        </RecordInput>
       )}
-      <VacationRecord>
-        <RecordTitle>휴가 기록</RecordTitle>
-        {Object.entries(vacationRecord).map(([date, reason]) => (
-          <RecordItem key={date}>
-            <span>{date}</span>: {reason}
-          </RecordItem>
-        ))}
-      </VacationRecord>
-    </SWrap>
+    </CalendarContainer>
   );
 };
 
-const SDiv = styled.div`
-  display: flex;
+const SHeaderTitle = styled.div`
+  font-size: 2.2rem;
+  font-weight: 700;
 `;
 
-const SWrap = styled.div`
+const SDayDiv = styled.div`
+  background-color: #91b7ff;
+  padding: 1.3rem;
+  border-radius: 0.3rem;
+  border-left: solid 1px #fff;
+  font-size: 1.2rem;
+  font-weight: 700;
+`;
+
+const SButton = styled.button`
+  padding: 0.8rem 1.2rem;
+  margin-left: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 0.5rem;
+  background-color: #82b2f8;
+  font-size: 1.2rem;
+  font-weight: 800;
+  cursor: pointer;
+  &:hover {
+    background-color: #82b2f8;
+    color: #fff;
+  }
+`;
+
+const RecordInput = styled.div`
+  margin-top: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+
+const RecordButton = styled.button`
+  margin-top: 10px;
+`;
+
+const CalendarContainer = styled.div`
+  width: 68vw;
+  height: 74vh;
+  padding-top: 2rem;
+  margin: auto;
+`;
+
+const CalendarHeader = styled.div`
   display: flex;
   align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  height: 100%;
+  justify-content: space-between;
+  margin-bottom: 2rem;
 `;
 
-const Calendar = styled.div`
+const CalendarBody = styled.div`
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  gap: 5px;
-`;
-
-const Day = styled.div`
-  padding: 10px;
   text-align: center;
-  font-size: 1.3rem;
-  font-weight: 700;
-  background-color: ${({ submitted }) => (submitted ? "#007bff" : "#f0f0f0")};
-  color: ${({ submitted }) => (submitted ? "#fff" : "#000")};
+`;
+
+const CalendarDate = styled.div`
+  padding: 2.5rem;
+  border-radius: 0.4rem;
+  text-align: center;
+  font-size: 1.1rem;
+  font-weight: 600;
   cursor: pointer;
-  border-radius: 1rem;
-`;
-
-const EmptyDay = styled.div`
-  background-color: transparent;
-`;
-
-const MonthHeader = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 10px;
-`;
-
-const MonthName = styled.div`
-  font-size: 20px;
-  font-weight: bold;
-`;
-
-const PrevButton = styled.button`
-  cursor: pointer;
-  font-size: 20px;
-`;
-
-const NextButton = styled.button`
-  cursor: pointer;
-  font-size: 20px;
-`;
-
-const InputContainer = styled.div`
-  margin-top: 20px;
-`;
-
-const InputLabel = styled.div`
-  font-weight: bold;
-  margin-bottom: 10px;
-`;
-
-const InputField = styled.input`
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 10px;
-`;
-
-const SubmitButton = styled.button`
-  background-color: #007bff;
-  color: #fff;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-`;
-
-const VacationRecord = styled.div`
-  margin-top: 20px;
-`;
-
-const RecordTitle = styled.div`
-  font-weight: bold;
-  margin-bottom: 10px;
-`;
-
-const RecordItem = styled.div`
-  margin-bottom: 5px;
-  padding: 5px;
-  background-color: #f0f0f0;
-  border-radius: 5px;
+  &:hover {
+    background-color: rgba(130, 178, 248, 0.5);
+  }
 `;
 
 export default SearchVacation;
