@@ -2,7 +2,6 @@ package servlet;
 
 import com.google.gson.Gson;
 import db.dao.selectDAO;
-import db.dao.updateDAO;
 import db.dto.EmployeeData;
 
 import javax.servlet.ServletException;
@@ -12,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 
 @WebServlet("/api/employees/ByName")
@@ -40,8 +40,9 @@ public class researchEmployeeByName extends HttpServlet {
             response.setContentType("text/plain;charset=UTF-8");
             response.getWriter().write("해당 이름에 맞는 사원이 존재하지 않습니다.");
         }else{
-            response.setContentType("text/plain;charset=UTF-8");
-            response.getWriter().write(result);
+            response.setContentType("application/json;charset=UTF-8");
+            PrintWriter out = response.getWriter();
+            out.println(result);
         }
     }
 }

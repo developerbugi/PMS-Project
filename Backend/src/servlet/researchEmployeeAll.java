@@ -16,7 +16,7 @@ public class researchEmployeeAll extends HttpServlet {
         selectDAO dao = new selectDAO();
         String result = dao.SearchEmployees();
 
-        response.setContentType("text/plain;charset=UTF-8");
+        response.setContentType("application/json;charset=UTF-8");
         PrintWriter out = response.getWriter();
         out.println(result);
     }

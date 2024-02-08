@@ -1,36 +1,54 @@
 package db.dao;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import db.connection.Connection_DB;
+import org.json.JSONArray;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 public class selectDAO {
-    String employees_info = "";
     public String SearchEmployees() {
         String SQL1 = "select * from employees";
+        JsonArray jsonArray = new JsonArray();
 
         try {
             Connection conn = Connection_DB.GetDB();
             PreparedStatement ptstn = conn.prepareStatement(SQL1);
             ResultSet rs = ptstn.executeQuery();
 
-            //데이터 어떤 형식으로 넘길지 상의 후 넘겨주기
             while (rs.next()) {
-                employees_info += rs.getString(1) + "," + rs.getString(2) + "," + rs.getString(3)
-                        + "," + rs.getString(4) + "," + rs.getString(5) + "," + rs.getString(6)
-                        + "," + rs.getString(7) + "," + rs.getString(8) + "," + rs.getString(9)
-                        + "," + rs.getString(10) + "," + rs.getString(11) + "," + rs.getString(12)
-                        + "," + rs.getString(13) + "," + rs.getString(14) + "," + rs.getString(15)
-                        + "," + rs.getString(16) + "," + rs.getString(17) + "," + rs.getString(18)
-                        + "," + rs.getString(19);
-                employees_info += "/\n";
+                JsonObject jsonObject = new JsonObject();
+                jsonObject.addProperty("com_id", rs.getString(1));
+                jsonObject.addProperty("name_kor", rs.getString(2));
+                jsonObject.addProperty("name_eng", rs.getString(3));
+                jsonObject.addProperty("address", rs.getString(4));
+                jsonObject.addProperty("emp_type", rs.getString(5));
+                jsonObject.addProperty("emp_hiredate", rs.getString(6));
+                jsonObject.addProperty("emp_tmndate", rs.getString(7));
+                jsonObject.addProperty("mob_num", rs.getString(8));
+                jsonObject.addProperty("resign_reason", rs.getString(9));
+                jsonObject.addProperty("rrn", rs.getString(10));
+                jsonObject.addProperty("emp_email", rs.getString(11));
+                jsonObject.addProperty("military", rs.getString(12));
+                jsonObject.addProperty("final_edu", rs.getString(13));
+                jsonObject.addProperty("major", rs.getString(14));
+                jsonObject.addProperty("annual_leave", rs.getString(15));
+                jsonObject.addProperty("sick_leave", rs.getString(16));
+                jsonObject.addProperty("dep_id", rs.getString(17));
+                jsonObject.addProperty("rank_id", rs.getString(18));
+                jsonObject.addProperty("etc", rs.getString(19));
+                jsonArray.add(jsonObject);
             }
 
             ptstn.close();
 
-            return employees_info;
+            Gson gson = new GsonBuilder().setPrettyPrinting().create();
+            return gson.toJson(jsonArray);
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -40,28 +58,42 @@ public class selectDAO {
 
     public String SearchEmployeeBYID(String com_id) {
         String SQL1 = "select * from employees where com_id = ?";
+        JsonArray jsonArray = new JsonArray();
 
         try {
             Connection conn = Connection_DB.GetDB();
             PreparedStatement ptstn = conn.prepareStatement(SQL1);
-            ptstn.setString(1,com_id);
+            ptstn.setString(1, com_id);
             ResultSet rs = ptstn.executeQuery();
 
-            // 데이터 어떤 형식으로 넘길지 상의 후 넘겨주기
             while (rs.next()) {
-                employees_info += rs.getString(1) + "," + rs.getString(2) + "," + rs.getString(3)
-                        + "," + rs.getString(4) + "," + rs.getString(5) + "," + rs.getString(6)
-                        + "," + rs.getString(7) + "," + rs.getString(8) + "," + rs.getString(9)
-                        + "," + rs.getString(10) + "," + rs.getString(11) + "," + rs.getString(12)
-                        + "," + rs.getString(13) + "," + rs.getString(14) + "," + rs.getString(15)
-                        + "," + rs.getString(16)+ "," + rs.getString(17) + "," + rs.getString(18)
-                        + "," + rs.getString(19);
-                employees_info += "/\n";
+                JsonObject jsonObject = new JsonObject();
+                jsonObject.addProperty("com_id", rs.getString(1));
+                jsonObject.addProperty("name_kor", rs.getString(2));
+                jsonObject.addProperty("name_eng", rs.getString(3));
+                jsonObject.addProperty("address", rs.getString(4));
+                jsonObject.addProperty("emp_type", rs.getString(5));
+                jsonObject.addProperty("emp_hiredate", rs.getString(6));
+                jsonObject.addProperty("emp_tmndate", rs.getString(7));
+                jsonObject.addProperty("mob_num", rs.getString(8));
+                jsonObject.addProperty("resign_reason", rs.getString(9));
+                jsonObject.addProperty("rrn", rs.getString(10));
+                jsonObject.addProperty("emp_email", rs.getString(11));
+                jsonObject.addProperty("military", rs.getString(12));
+                jsonObject.addProperty("final_edu", rs.getString(13));
+                jsonObject.addProperty("major", rs.getString(14));
+                jsonObject.addProperty("annual_leave", rs.getString(15));
+                jsonObject.addProperty("sick_leave", rs.getString(16));
+                jsonObject.addProperty("dep_id", rs.getString(17));
+                jsonObject.addProperty("rank_id", rs.getString(18));
+                jsonObject.addProperty("etc", rs.getString(19));
+                jsonArray.add(jsonObject);
             }
 
             ptstn.close();
 
-            return employees_info;
+            Gson gson = new GsonBuilder().setPrettyPrinting().create();
+            return gson.toJson(jsonArray);
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -69,11 +101,9 @@ public class selectDAO {
         }
     }
 
-    /* 이름으로 사원 조회
-    출력 -> 사번, 이름, 부서, 직급
-    */
     public String SearchEmployeeBYName(String name_kor) {
         String SQL1 = "select * from employees where name_kor = ?";
+        JsonArray jsonArray = new JsonArray();
 
         try {
             Connection conn = Connection_DB.GetDB();
@@ -81,16 +111,20 @@ public class selectDAO {
             ptstn.setString(1, name_kor);
             ResultSet rs = ptstn.executeQuery();
 
-            // 데이터 어떤 형식으로 넘길지 상의 후 넘겨주기
+
             while (rs.next()) {
-                employees_info += rs.getString(1) + "," + rs.getString(2)
-                        + "," + rs.getString(17) + "," + rs.getString(18);
-                employees_info += "/\n";
+                JsonObject jsonObject = new JsonObject();
+                jsonObject.addProperty("com_id", rs.getString(1));
+                jsonObject.addProperty("name_kor", rs.getString(2));
+                jsonObject.addProperty("dep_id", rs.getString(17));
+                jsonObject.addProperty("rank_id", rs.getString(18));
+                jsonArray.add(jsonObject);
             }
 
             ptstn.close();
 
-            return employees_info;
+            Gson gson = new GsonBuilder().setPrettyPrinting().create();
+            return gson.toJson(jsonArray);
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -98,3 +132,5 @@ public class selectDAO {
         }
     }
 }
+
+
