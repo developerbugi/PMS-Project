@@ -42,11 +42,11 @@ const JoinEmployeePage = () => {
       };
   
       try {
-        // 여기에서 apiData를 사용하여 API 호출을 수행합니다.
+        // 여기에서 apiData를 사용하여 API 호출을 수행
         const response = await axios.post('url', apiData);
         console.log(response.data);
       // API 호출이 성공하면 알림을 표시
-      alert('저장되었습니다');
+      alert('등록되었습니다');
       } catch (error) {
         console.error(error);
       }
@@ -64,7 +64,7 @@ const JoinEmployeePage = () => {
           </Header>
             <ControlButtons >
               <Button onClick={handleSubmit}>
-                저장 </Button>                   
+                등록 </Button>                   
             </ControlButtons>
             
           </Row>
@@ -127,7 +127,7 @@ const JoinEmployeePage = () => {
                   name="rrn"
                   value={employee.rrn}
                   onChange={handleInputChange}
-                  placeholder="앞자리 6자리"
+                  placeholder="ex) 010101-456789"
                   style = {{maxWidth :'100px'}}
                 />
               </Row>
