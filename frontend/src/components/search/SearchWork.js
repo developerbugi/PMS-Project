@@ -2,7 +2,14 @@ import React from "react";
 import styled from "styled-components";
 
 const SearchWork = () => {
-  return <div>근무 일지</div>;
+  return <SWrap>근무 일지</SWrap>;
 };
+
+const SWrap = styled.div`
+  margin-left: 2rem;
+  width: 100%;
+  height: 100%;
+  border-left: solid 2px #ddd;
+`;
 
 export default SearchWork;
