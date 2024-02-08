@@ -13,7 +13,13 @@ import java.sql.ResultSet;
 
 public class selectDAO {
     public String SearchEmployees() {
-        String SQL1 = "select * from employees";
+        String SQL1 = "SELECT e.com_id, e.name_kor, e.name_eng, e.address, e.emp_type, e.emp_hiredate, " +
+                "e.emp_tmndate, e.mob_num, e.resign_reason, e.rrn, e.emp_email, e.military, " +
+                "e.final_edu, e.major, e.annual_leave, e.sick_leave, d.dep_name, r.rank_name, e.etc " +
+                "FROM employees e " +
+                "JOIN department d ON e.dep_id = d.dep_id " +
+                "JOIN role r ON e.rank_id = r.rank_id";
+
         JsonArray jsonArray = new JsonArray();
 
         try {
@@ -57,7 +63,14 @@ public class selectDAO {
     }
 
     public String SearchEmployeeBYID(String com_id) {
-        String SQL1 = "select * from employees where com_id = ?";
+        String SQL1 = "SELECT e.com_id, e.name_kor, e.name_eng, e.address, e.emp_type, e.emp_hiredate, " +
+                "e.emp_tmndate, e.mob_num, e.resign_reason, e.rrn, e.emp_email, e.military, " +
+                "e.final_edu, e.major, e.annual_leave, e.sick_leave, d.dep_name, r.rank_name, e.etc " +
+                "FROM employees e " +
+                "JOIN department d ON e.dep_id = d.dep_id " +
+                "JOIN role r ON e.rank_id = r.rank_id " +
+                "WHERE e.com_id = ?";
+
         JsonArray jsonArray = new JsonArray();
 
         try {
@@ -107,6 +120,7 @@ public class selectDAO {
                 "JOIN department d ON e.dep_id = d.dep_id " +
                 "JOIN role r ON e.rank_id = r.rank_id " +
                 "WHERE e.name_kor LIKE ?";
+
         JsonArray jsonArray = new JsonArray();
 
         try {
