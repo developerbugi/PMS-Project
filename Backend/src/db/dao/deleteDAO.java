@@ -16,8 +16,8 @@ public class deleteDAO {
             ptstn.close();
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            return "삭제 오류";
+            return "삭제오류";
         }
-        return "삭제 성공";
+        return "삭제성공";
     }
 }
