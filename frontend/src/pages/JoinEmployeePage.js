@@ -1,70 +1,73 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import employeeImage from '../img/Employee.png';
-import { useNavigate } from "react-router-dom";
-import { Route, Routes } from "react-router-dom";
-import GiveNumberPage from "../pages/giveNumberPage";
+
+import axios from 'axios'; 
 
 const JoinEmployeePage = () => {
 
-  const navigate = useNavigate();
-
-  const navigateToGive = () => {
-    navigate("/give");
-  };
-
-
-  const [formData, setFormData] = useState({
-    name: "",
-    englishName: "",
-    ssn: "",
-    employeeNumber: "",
-    department: "",
-    phoneNumber: "",
-    position: "",
-    major: "",
-    highestLevel: "",
-    employmentType: "",
-    firstDay: "",
-    lastDay: "",
-    email: "",
-    military: "",
-    address: "",
+  const [employee, setEmployee] = useState({
+    name_kor: "", //이름
+    name_eng: "", //영문이름
+    rrn: "", //주민등록번호
+    com_id: "", //사번
+    dep_id: "", //부서
+    mob_num: "", //휴대폰번호
+    rank_id: "", //직급
+    major: "", //전공
+    final_edu: "", //최종학력
+    emp_type: "", //입사구분
+    emp_hiredate: "", //입사일
+    email   : "", //이메일
+    military: "", //군필
+    address: "", //주소
   });
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
+
+
+  const handleInputChange = (e) => {
+    setEmployee({ ...employee, [e.target.name]: e.target.value });
+    
   };
+
+    const handleSubmit = async (event) => {
+      // 이벤트의 기본 동작을 중단
+    // 폼 제출에 의한 페이지 새로고침을 막는 역할
+      event.preventDefault();
+  
+      // API 호출을 위한 데이터를 설정
+      const apiData = {
+        ...employee,
+        com_id: null  // com_id(사번)를 null로 설정
+      };
+  
+      try {
+        // 여기에서 apiData를 사용하여 API 호출을 수행합니다.
+        const response = await axios.post('url', apiData);
+        console.log(response.data);
+      // API 호출이 성공하면 알림을 표시
+      alert('저장되었습니다');
+      } catch (error) {
+        console.error(error);
+      }
+    };
 
 
   return (
     <SWrap>
       <EmployeeSystemContainer>
-        
+      <form onSubmit={handleSubmit}>
         <main>
           <Row className="first-row">
           <Header>
-          <h1>사원 등록 시스템</h1>
+          <h1>사원 등록</h1>
           </Header>
             <ControlButtons >
-              <Button>저장</Button>
-              <Button 
-              onClick={navigateToGive}
-              style = 
-              {{
-                marginLeft : '5px'
-              }}
-              >사번 부여</Button>   
+              <Button onClick={handleSubmit}>
+                저장 </Button>                   
             </ControlButtons>
+            
           </Row>
-
-          <Routes>
-          <Route path="/give" element={<GiveNumberPage />}></Route>
-          </Routes>
 
           <div className="info-section">
           <div style={{ display: 'flex', alignItems: 'flex-start' }}>
@@ -78,7 +81,7 @@ const JoinEmployeePage = () => {
             />
             <div>
               <Row style = {{marginLeft : '10px'}}>
-                <label htmlFor="name"
+                <label htmlFor="name_kor"
                 style = {{
                   width :'70px',
                   textAlign: 'center'
@@ -86,14 +89,15 @@ const JoinEmployeePage = () => {
                 >이름 : </label>
                 <InputField
                   type="text"
-                  id="name"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleChange}
+                  id="name_kor"
+                  name="name_kor"
+                  value={employee.name_kor}
+                  onChange={handleInputChange}
+                  placeholder="ex) 최휘윤"
                   style = {{maxWidth :'100px'}}
                 />
 
-                <label htmlFor="englishName"
+                <label htmlFor="name_eng"
                 style = {{
                   width :'70px',
                   marginLeft : '10px',
@@ -102,14 +106,15 @@ const JoinEmployeePage = () => {
                 >영문이름 : </label>
                 <InputField
                   type="text"
-                  id="englishName"
-                  name="englishName"
-                  value={formData.englishName}
-                  onChange={handleChange}
+                  id="name_eng"
+                  name="name_eng"
+                  value={employee.name_eng}
+                  onChange={handleInputChange}
+                  placeholder="ex) Hwiyoon"
                   style = {{maxWidth :'100px'}}
                 />
 
-                <label htmlFor="ssn"
+                <label htmlFor="rrn"
                 style = {{
                   width :'70px',
                   marginLeft : '10px',
@@ -118,15 +123,16 @@ const JoinEmployeePage = () => {
                 >주민번호 :</label>
                 <InputField
                   type="text"
-                  id="ssn"
-                  name="ssn"
-                  value={formData.ssn}
-                  onChange={handleChange}
+                  id="rrn"
+                  name="rrn"
+                  value={employee.rrn}
+                  onChange={handleInputChange}
+                  placeholder="앞자리 6자리"
                   style = {{maxWidth :'100px'}}
                 />
               </Row>
               <Row style = {{marginLeft : '10px'}}>
-                <label htmlFor="employeeNumber"
+                <label htmlFor="com_id"
                 style = {{
                   width :'70px',
                   textAlign: 'center'
@@ -134,14 +140,15 @@ const JoinEmployeePage = () => {
                 >사번 :</label>
                 <InputField
                   type="text"
-                  id="employeeNumber"
-                  name="employeeNumber"
-                  value={formData.employeeNumber}
-                  onChange={handleChange}
+                  id="com_id"
+                  name="com_id"
+                  value={employee.com_id}
+                  readOnly  // 입력 필드를 읽기 전용으로 설정
+                  placeholder="추후 부여 예정"
                   style = {{maxWidth :'100px'}}
                 />
 
-                <label htmlFor="department"
+                <label htmlFor="dep_id"
                 style = {{
                   width :'70px',
                   marginLeft : '10px',
@@ -150,14 +157,15 @@ const JoinEmployeePage = () => {
                 >부서 :</label>
                 <InputField
                   type="text"
-                  id="department"
-                  name="department"
-                  value={formData.department}
-                  onChange={handleChange}
+                  id="dep_id"
+                  name="dep_id"
+                  value={employee.dep_id}
+                  onChange={handleInputChange}
+                  placeholder="ex) IT 기획"
                   style = {{maxWidth :'100px'}}
                 />
 
-                <label htmlFor="phoneNumber"
+                <label htmlFor="mob_num"
                 style = {{
                   width :'70px',
                   marginLeft : '10px',
@@ -165,18 +173,21 @@ const JoinEmployeePage = () => {
                 }}
                 >휴대폰번호 :</label>
                 <InputField
-                  type="text"
-                  id="phoneNumber"
-                  name="phoneNumber"
-                  value={formData.phoneNumber}
-                  onChange={handleChange}
+                  type="tel"
+                  id="mob_num"
+                  name="mob_num"
+                  value={employee.mob_num}
+                  onChange={handleInputChange}
+                  placeholder="010-xxxx-xxxx"
                   style = {{maxWidth :'100px'}}
                 />
               </Row>
             </div>
             </div>
-            <Row style = {{marginTop : '20px'}}>
-              <label htmlFor="position"
+            <Row style = {{
+              marginTop : '20px'}}>
+
+              <label htmlFor="rank_id"
               style = {{
                 width :'70px',
                 textAlign: 'center'
@@ -184,17 +195,19 @@ const JoinEmployeePage = () => {
               >직급 :</label>
               <InputField
                 type="text"
-                id="position"
-                name="position"
-                value={formData.position}
-                onChange={handleChange}
-                style = {{maxWidth :'150px'}}
+                id="rank_id"
+                name="rank_id"
+                value={employee.rank_id}
+                onChange={handleInputChange}
+                placeholder="ex) 과장"
+                style = {{
+                  maxWidth :'150px'
+              }}
               />
 
               <label htmlFor="major"
               style = {{
                 width :'70px',
-                marginLeft : '20px',
                 textAlign: 'center'
                 }}
                 >전공 :</label>
@@ -202,45 +215,53 @@ const JoinEmployeePage = () => {
                 type="text"
                 id="major"
                 name="major"
-                value={formData.major}
-                onChange={handleChange}
+                value={employee.major}
+                onChange={handleInputChange}
+                placeholder="ex) 멀티미디어공학과"
                 style = {{maxWidth :'150px'}}
               />
-
-              <label htmlFor="highestLevel"
+              <label htmlFor="final_edu"
               style = {{
                 width :'70px',
                 marginLeft : '20px',
                 textAlign: 'center'
                 }}
-                >최종학력 :</label>
-              <InputField
-                type="text"
-                id="highestLevel"
-                name="highestLevel"
-                value={formData.highestLevel}
-                onChange={handleChange}
-                style = {{maxWidth :'150px'}}
-              />
+
+              >최종학력 :</label>
+
+              <div onChange={handleInputChange}>
+                <input type="radio" value="대학교 졸업" name="final_edu" /> 대학교 졸업<br />
+                <input type="radio" value="고등학교 졸업" name="final_edu" /> 고등학교 졸업<br />
+                <input type="radio" value="중학교 졸업" name="final_edu" /> 중학교 졸업
+              </div>
+              
             </Row>
 
             <Row style = {{marginTop : '20px'}}>
-              <label htmlFor="employmentType"
+              
+            <label htmlFor="emp_type"
               style = {{
-                width :'70px',
-                textAlign: 'center'
+                width :'75px',
+                textAlign: 'center',
+                marginLeft : '10px'
                 }}
               >입사구분 :</label>
-              <InputField
-                type="text"
-                id="employmentType"
-                name="employmentType"
-                value={formData.employmentType}
-                onChange={handleChange}
-                style = {{maxWidth :'150px'}}
-              />
+              <select 
+                id="emp_type" 
+                name="emp_type" 
+                onChange={handleInputChange} 
+                style = {{maxWidth :'550px',
+                marginLeft : '10px'}}>
+                <option value="">--------- 선택해주세요 ---------</option>
+                <option value="정규직">정규직</option>
+                <option value="계약직">계약직</option>
+                <option value="기간제">기간제</option>
+                <option value="일용직">일용직</option>
+                <option value="파견직">파견직</option>
+                <option value="기타">기타</option>
+              </select>
 
-              <label htmlFor="firstDay"
+              <label htmlFor="emp_hiredate"
               style = {{
                 width :'70px',
                 marginLeft : '20px',
@@ -248,34 +269,41 @@ const JoinEmployeePage = () => {
                 }}
                 >입사일 :</label>
               <InputField
-                type="text"
-                id="firstDay"
-                name="firstDay"
-                value={formData.firstDay}
-                onChange={handleChange}
-                style = {{maxWidth :'150px'}}
+                type="date"
+                id="emp_hiredate"
+                name="emp_hiredate"
+                value={employee.emp_hiredate}
+                onChange={handleInputChange}
+                style = {{maxWidth :'150px',
+                marginLeft : '10px'}}
               />
 
-              <label htmlFor="lastDay"
-              style = {{
+              <label htmlFor="military"
+                style = {{
                 width :'70px',
-                marginLeft : '20px',
+                marginLeft : '10px',
                 textAlign: 'center'
                 }}
-                >퇴사일 :</label>
-              <InputField
-                type="text"
-                id="lastDay"
-                name="lastDay"
-                value={formData.lastDay}
-                onChange={handleChange}
-                style = {{maxWidth :'150px'}}
-              />
+                >군필 :</label>
+              <select
+                id="military"
+                name="military"
+                onChange={handleInputChange}
+                style = {{
+                  maxWidth :'550px',
+                  marginLeft : '10px'
+
+              }}
+              >
+                <option value="">--------- 선택해주세요 ---------</option>
+                <option value="Y">Y</option>
+                <option value="N">N</option>
+              </select>
             </Row>
             <Row>
               <label htmlFor="email"
               style = {{
-                width :'70px',
+                width :'55px',
                 textAlign: 'center'
                 }}>
                   이메일 :</label>
@@ -283,26 +311,11 @@ const JoinEmployeePage = () => {
                 type="text"
                 id="email"
                 name="email"
-                value={formData.email}
-                onChange={handleChange}
-                style = {{maxWidth :'390px'}}
+                value={employee.email}
+                onChange={handleInputChange}
+                placeholder="ex) seohan@gmail.com"
               />
-
-              <label htmlFor="military"
-              style = {{
-                width :'70px',
-                marginLeft : '20px',
-                textAlign: 'center'
-                }}
-                >군필 :</label>
-              <InputField
-                type="text"
-                id="military"
-                name="military"
-                value={formData.department}
-                onChange={handleChange}
-                style = {{maxWidth :'150px'}}
-              />
+ 
             </Row>
             <Row>
               <label htmlFor="address"
@@ -314,14 +327,19 @@ const JoinEmployeePage = () => {
                 type="text"
                 id="address"
                 name="address"
-                value={formData.address}
-                onChange={handleChange}
+                value={employee.address}
+                onChange={handleInputChange}
+                placeholder="ex) 경기도 용인시 수지구 서한로 123번길 10 서한아파트 101동 101호"
               />
             </Row>
+            
           </div>
+          
         </main>
+        </form>
       </EmployeeSystemContainer>
     </SWrap>
+    
   );
 };
 
@@ -359,7 +377,7 @@ const Header = styled.header`
 const Row = styled.div`
 
   display: flex;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 
   &.first-row {
     display: flex;
@@ -390,6 +408,11 @@ const InputField = styled.input`
   border: 1px solid #ccc;
   border-radius: 4px;
   width: 100%;
+
+  &:focus {
+    border-color: #699CFF;  
+    outline: none;  
+  }
 `;
 
 const TextAreaField = styled.textarea`
