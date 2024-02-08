@@ -102,13 +102,17 @@ public class selectDAO {
     }
 
     public String SearchEmployeeBYName(String name_kor) {
-        String SQL1 = "select * from employees where name_kor = ?";
+        String SQL1 = "SELECT e.com_id, e.name_kor, d.dep_name, r.rank_name " +
+                "FROM employees e " +
+                "JOIN department d ON e.dep_id = d.dep_id " +
+                "JOIN role r ON e.rank_id = r.rank_id " +
+                "WHERE e.name_kor LIKE ?";
         JsonArray jsonArray = new JsonArray();
 
         try {
             Connection conn = Connection_DB.GetDB();
             PreparedStatement ptstn = conn.prepareStatement(SQL1);
-            ptstn.setString(1, name_kor);
+            ptstn.setString(1, "%" + name_kor + "%");
             ResultSet rs = ptstn.executeQuery();
 
 
@@ -116,8 +120,8 @@ public class selectDAO {
                 JsonObject jsonObject = new JsonObject();
                 jsonObject.addProperty("com_id", rs.getString(1));
                 jsonObject.addProperty("name_kor", rs.getString(2));
-                jsonObject.addProperty("dep_id", rs.getString(17));
-                jsonObject.addProperty("rank_id", rs.getString(18));
+                jsonObject.addProperty("dep_id", rs.getString(3));
+                jsonObject.addProperty("rank_id", rs.getString(4));
                 jsonArray.add(jsonObject);
             }
 
