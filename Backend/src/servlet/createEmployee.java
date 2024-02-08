@@ -12,7 +12,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 
 @WebServlet("/api/join")
-public class InsertServlet extends HttpServlet {
+public class createEmployee extends HttpServlet {
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
@@ -42,21 +43,30 @@ public class InsertServlet extends HttpServlet {
         String major = employeeData.getMajor();
         String dep_id = employeeData.getDep_id();
         String rank_id = employeeData.getRank_id();
+        String etc = employeeData.getEtc();
+
 
 
         // 추출한 데이터를 활용하여 원하는 로직 수행
         insertDAO td = new insertDAO();
 
-        System.out.println(td.insertMember(com_id,name_kor,name_eng,
+        String result = td.insertMember(com_id,name_kor,name_eng,
                 address,emp_type,emp_hiredate,
                 "",mob_num,"",
-                rrn,emp_email,military,final_edu,major,
-                "12","12",dep_id,
-                rank_id));
+                rrn,emp_email,military,
+                final_edu,major, "12",
+                "12",dep_id, rank_id,etc);
 
         // 응답 처리
-
-        response.setContentType("text/plain");
-        response.getWriter().write("데이터가 정상적으로 처리되었습니다.");
+        if (result.equals("추가성공")){
+            response.setContentType("text/plain;charset=UTF-8");
+            response.getWriter().write("사원이 정상적으로 추가되었습니다.");
+        }else if (result.equals("사번중복")){
+            response.setContentType("text/plain;charset=UTF-8");
+            response.getWriter().write("사번 중복으로 인해 등록에 실패하였습니다.");
+        }else {
+            response.setContentType("text/plain;charset=UTF-8");
+            response.getWriter().write("사원 등록에 실패하였습니다.");
+        }
     }
 }

@@ -7,15 +7,24 @@ public class EmployeeData {
     private String address;
     private String emp_type;
     private String emp_hiredate;
+
+    private String emp_tmndate;
     private String mod_num;
+
+    private String resign_reason;
+
     private String rrn;
     private String emp_email;
     private String military;
     private String final_edu;
     private String major;
-
     private String dep_id;
+
+    private String annual_leave;
+
+    private String sick_leave;
     private String rank_id;
+    private String etc;
 
     public String getCom_id() {
         return com_id;
@@ -27,6 +36,38 @@ public class EmployeeData {
 
     public String getName_kor() {
         return name_kor;
+    }
+
+    public String getEmp_tmndate() {
+        return emp_tmndate;
+    }
+
+    public void setEmp_tmndate(String emp_tmndate) {
+        this.emp_tmndate = emp_tmndate;
+    }
+
+    public String getResign_reason() {
+        return resign_reason;
+    }
+
+    public void setResign_reason(String resign_reason) {
+        this.resign_reason = resign_reason;
+    }
+
+    public String getAnnual_leave() {
+        return annual_leave;
+    }
+
+    public void setAnnual_leave(String annual_leave) {
+        this.annual_leave = annual_leave;
+    }
+
+    public String getSick_leave() {
+        return sick_leave;
+    }
+
+    public void setSick_leave(String sick_leave) {
+        this.sick_leave = sick_leave;
     }
 
     public void setName_kor(String name_kor) {
@@ -47,6 +88,14 @@ public class EmployeeData {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public String getEtc() {
+        return etc;
+    }
+
+    public void setEtc(String etc) {
+        this.etc = etc;
     }
 
     public String getEmp_type() {
