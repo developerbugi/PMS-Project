@@ -38,7 +38,7 @@ public class researchEmployeeByName extends HttpServlet {
 
         if (result.equals("검색실패")){
             response.setContentType("text/plain;charset=UTF-8");
-            response.getWriter().write("해당 이름에 맞는 사원이 존재하지 않습니다.");
+            response.getWriter().write("해당 이름과 일치하는 사원이 존재하지 않습니다.");
         }else{
             response.setContentType("application/json;charset=UTF-8");
             PrintWriter out = response.getWriter();
