@@ -121,6 +121,7 @@ const JoinEmployeePage = () => {
     email   : "", //이메일
     military: "", //군필
     address: "", //주소
+    peculiarities: "" //기타 특이사항
   });
 
   const handleInputChange = (e) => {
@@ -445,16 +446,16 @@ const JoinEmployeePage = () => {
               />
             </Row>
             <Row>
-              <label htmlFor="address"
+              <label htmlFor="peculiarities"
               style = {{
                 width :'55px',
                 textAlign: 'center'
                 }}>기타 특이사항 :</label>
               <InputField
                 type="text"
-                id="address"
-                name="address"
-                value={employee.address}
+                id="peculiarities"
+                name="peculiarities"
+                value={employee.peculiarities}
                 onChange={handleInputChange}
                 style = {{marginLeft : '20px'}}
               />
