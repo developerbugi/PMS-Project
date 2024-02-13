@@ -141,13 +141,13 @@ const employeeState = atom({
     rrn: "", //주민등록번호
     com_id: "", //사번
     dep_id: "", //부서
-    mob_num: "", //휴대폰번호
+    mod_num: "", //휴대폰번호
     rank_id: "", //직급
     major: "", //전공
     final_edu: "", //최종학력
     emp_type: "", //입사구분
     emp_hiredate: "", //입사일
-    email   : "", //이메일
+    emp_email   : "", //이메일
     military: "", //군필
     address: "", //주소
     etc: "" //기타 특이사항
@@ -187,18 +187,24 @@ const JoinEmployeePage = () => {
   try {
     // 여기에서 apiData를 사용하여 API 호출을 수행
     const response = await axios.post('url', apiData);
-    console.log(response.data);
+  
     // API 호출이 성공하면 알림을 표시
-    alert('등록되었습니다');
-
+    alert('사원이 정상적으로 추가되었습니다');
+  
     console.log(apiData);
     // setSearch('');  // recoil 상태를 초기화
     // API 호출이 성공하면 ../search/group 페이지로 이동
     navigate('../search/group');
-    } catch (error) {
-      console.error(error);
-      alert('오류가 발생했습니다. 다시 시도해주세요.');
+  } catch (error) {
+    console.error(error);
+  
+    // 에러 메시지 또는 코드를 확인하여 com_id 중복을 처리
+    if (error.response && error.response.data === 'COM_ID_DUPLICATE') {
+      alert('사번 중복으로 인해 사원 등록에 실패하였습니다.');
+    } else {
+      alert('사원 등록에 실패하였습니다.');
     }
+  }
   };
 
   return (
@@ -294,12 +300,12 @@ const JoinEmployeePage = () => {
                   style = {{maxWidth :'100px'}}
                 />
 
-                <Label htmlFor="mob_num">휴대폰번호 :</Label>
+                <Label htmlFor="mod_num">휴대폰번호 :</Label>
                 <InputField
                   type="tel"
-                  id="mob_num"
-                  name="mob_num"
-                  value={employee.mob_num}
+                  id="mod_num"
+                  name="mod_num"
+                  value={employee.mod_num}
                   onChange={handleInputChange}
                   placeholder="010-xxxx-xxxx"
                   style = {{maxWidth :'100px'}}
@@ -381,12 +387,12 @@ const JoinEmployeePage = () => {
               </select>
             </Row>
             <Row>
-              <Label htmlFor="email">이메일 :</Label>
+              <Label htmlFor="emp_email">이메일 :</Label>
               <InputField
                 type="text"
-                id="email"
-                name="email"
-                value={employee.email}
+                id="emp_email"
+                name="emp_email"
+                value={employee.emp_email}
                 onChange={handleInputChange}
                 style = {{
                   marginLeft : '10px'}}
