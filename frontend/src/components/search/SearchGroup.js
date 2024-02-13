@@ -1,23 +1,39 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 //import recoil
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import {
   selectedIdState,
   userDataState,
   selectedMenuState,
 } from "../../recoil/SearchRecoil";
+import axios from "../../api/axiosConfig";
+import { fetchAllEmployees } from "../../api/employeesApi"; // Axios 인스턴스
 
 const SearchGroup = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [selectedId, setSelectedId] = useRecoilState(selectedIdState);
   const navigate = useNavigate();
+  const setUserData = useSetRecoilState(userDataState); // Recoil 상태 설정 함수
   const userData = useRecoilValue(userDataState);
 
   const [selectedMenu, setSelectedMenu] = useRecoilState(selectedMenuState);
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const response = await fetchAllEmployees(); // 사용자 데이터를 가져오는 API 경로
+        setUserData(response); // 가져온 데이터를 Recoil 상태에 설정
+      } catch (error) {
+        console.error("Failed to fetch user data:", error);
+      }
+    };
+
+    fetchUserData();
+  }, [setUserData]); // 의존성 배열에 setUserData 추가
 
   // 이름이 일치하는 사람 필터링
   const handleSearch = () => {
