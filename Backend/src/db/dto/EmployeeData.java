@@ -9,7 +9,7 @@ public class EmployeeData {
     private String emp_hiredate;
 
     private String emp_tmndate;
-    private String mod_num;
+    private String mob_num;
 
     private String resign_reason;
 
@@ -114,12 +114,12 @@ public class EmployeeData {
         this.emp_hiredate = emp_hiredate;
     }
 
-    public String getMod_num() {
-        return mod_num;
+    public String getMob_num() {
+        return mob_num;
     }
 
-    public void setMod_num(String mod_num) {
-        this.mod_num = mod_num;
+    public void setMob_num(String mod_num) {
+        this.mob_num = mob_num;
     }
 
     public String getRrn() {

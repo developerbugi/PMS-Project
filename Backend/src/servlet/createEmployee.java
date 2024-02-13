@@ -35,7 +35,7 @@ public class createEmployee extends HttpServlet {
         String address = employeeData.getAddress();
         String emp_type = employeeData.getEmp_type();
         String emp_hiredate = employeeData.getEmp_hiredate();
-        String mob_num = employeeData.getMod_num();
+        String mob_num = employeeData.getMob_num();
         String rrn = employeeData.getRrn();
         String emp_email = employeeData.getEmp_email();
         String military = employeeData.getMilitary();
