@@ -13,9 +13,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-
-@WebServlet("/api/employees/ByName")
-public class researchEmployeeByName extends HttpServlet {
+@WebServlet("/api/employees/ById")
+public class researchEmployeeById extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
@@ -31,15 +30,15 @@ public class researchEmployeeByName extends HttpServlet {
         Gson gson = new Gson();
         EmployeeData employeeData = gson.fromJson(jsonData, EmployeeData.class);
 
-        String name_kor = employeeData.getName_kor();
+        String com_id = employeeData.getCom_id();
 
         selectDAO td = new selectDAO();
-        String result = td.SearchEmployeeBYName(name_kor);
+        String result = td.SearchEmployeeBYID(com_id);
 
-        if (result.equals("검색실패")){
+        if (result.equals("검색실패")) {
             response.setContentType("text/plain;charset=UTF-8");
-            response.getWriter().write("해당 이름과 일치하는 사원이 존재하지 않습니다.");
-        }else{
+            response.getWriter().write("해당 사번과 일치하는 사원이 존재하지 않습니다.");
+        } else {
             response.setContentType("application/json;charset=UTF-8");
             PrintWriter out = response.getWriter();
             out.println(result);

@@ -44,14 +44,14 @@ public class insertDAO {
                     ptstm.setDate(6, Date.valueOf(emp_hiredate));
                     ptstm.setDate(7, null);
                     ptstm.setString(8, mob_num);
-                    ptstm.setString(9, null);
+                    ptstm.setString(9, "-");
                     ptstm.setString(10, rrn);
                     ptstm.setString(11, emp_email);
                     ptstm.setString(12, military);
                     ptstm.setString(13, final_edu);
                     ptstm.setString(14, major);
-                    ptstm.setString(15, annual_leave);
-                    ptstm.setString(16, sick_leave);
+                    ptstm.setString(15, "12");
+                    ptstm.setString(16, "12");
                     ptstm.setString(17, dep_id);
                     ptstm.setString(18, rank_id);
                     ptstm.setString(19, etc);
