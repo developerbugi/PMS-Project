@@ -191,7 +191,7 @@ const SButton = styled.button`
 const RecordInput = styled.div`
   margin-top: 2.5rem;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
 `;
