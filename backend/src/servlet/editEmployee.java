@@ -12,8 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedReader;
 import java.io.IOException;
 
-@WebServlet("/api/exit")
-public class exitEmployee extends HttpServlet {
+@WebServlet("/api/edit")
+public class editEmployee extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
@@ -32,19 +32,30 @@ public class exitEmployee extends HttpServlet {
         EmployeeData employeeData = gson.fromJson(jsonData, EmployeeData.class);
 
         String com_id = employeeData.getCom_id();
-        String emp_tmndate = employeeData.getEmp_tmndate();
-        String resign_reason = employeeData.getResign_reason();
+        String name_kor = employeeData.getName_kor();
+        String name_eng = employeeData.getName_eng();
+        String address = employeeData.getAddress();
+        String emp_type = employeeData.getEmp_type();
+        String mob_num = employeeData.getMob_num();
+        String emp_email = employeeData.getEmp_email();
+        String military = employeeData.getMilitary();
+        String final_edu = employeeData.getFinal_edu();
+        String major = employeeData.getMajor();
+        String dep_id = employeeData.getDep_id();
+        String rank_id = employeeData.getRank_id();
+        String etc = employeeData.getEtc();
 
         updateDAO td = new updateDAO();
-        String result = td.exitEmployee(com_id, emp_tmndate, resign_reason);
+        String result = td.editEmployee(com_id,name_kor,name_eng,address,emp_type,mob_num,
+                emp_email, military, final_edu, major, dep_id, rank_id, etc);
 
-        // 응답 처리
-        if(result.equals("퇴사 업데이트 성공")){
+        if(result.equals("수정성공")){
             response.setContentType("text/plain;charset=UTF-8");
-            response.getWriter().write("정상적으로 퇴사처리 되었습니다.");
+            response.getWriter().write("사원 정보 수정이 정상적으로 완료되었습니다.");
         }else{
             response.setContentType("text/plain;charset=UTF-8");
-            response.getWriter().write("퇴사 처리에 실패하였습니다.");
+            response.getWriter().write("사원 정보 수정에 실패하였습니다.");
         }
+
     }
 }
