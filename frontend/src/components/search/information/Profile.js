@@ -63,7 +63,6 @@ const SWrap = styled.div`
   flex-direction: column;
   align-items: stretch;
   justify-content: center;
-  height: 100%;
 `;
 
 const SInfoDiv = styled.div`
