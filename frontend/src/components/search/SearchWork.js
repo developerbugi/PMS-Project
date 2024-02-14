@@ -9,7 +9,6 @@ const SWrap = styled.div`
   margin-left: 2rem;
   width: 100%;
   height: 100%;
-  border-left: solid 2px #ddd;
 `;
 
 export default SearchWork;

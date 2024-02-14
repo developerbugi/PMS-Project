@@ -10,7 +10,6 @@ import SearchWork from "../components/search/SearchWork";
 import SearchVacation from "../components/search/SearchVacation";
 import SearchIn from "../components/search/SearchIn";
 import SearchOut from "../components/search/SearchOut";
-import Profile from "../components/search/information/Profile";
 
 //import image
 import homelogo from "../assets/img/home.svg";
@@ -19,6 +18,7 @@ import vacationlogo from "../assets/img/beach_access.svg";
 import worklogo from "../assets/img/work.svg";
 import inlogo from "../assets/img/login.svg";
 import outlogo from "../assets/img/logout.svg";
+import EmployeeItem from "../components/search/EmployeeItem";
 
 const SearchEmployeePage = () => {
   const [selectedMenu, setSelectedMenu] = useRecoilState(selectedMenuState);
@@ -44,7 +44,7 @@ const SearchEmployeePage = () => {
       case 6:
         return <SearchOut />;
       case 7:
-        return <Profile />;
+        return <EmployeeItem />;
       default:
         return null;
     }
@@ -113,7 +113,7 @@ const SWrap = styled.div`
 
 const SContainer = styled.div`
   width: 92vw;
-  /* height: 80vh; */
+  height: 67vh;
   border-radius: 1rem;
   padding: 2rem;
   margin-top: 6rem;

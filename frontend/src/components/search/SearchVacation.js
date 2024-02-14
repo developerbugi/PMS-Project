@@ -114,50 +114,73 @@ const SearchVacation = () => {
       </CalendarBody>
       {selectedDate !== null && (
         <RecordInput>
-          <h3>{`${date.getFullYear()}년 ${
+          <RecordTitle>{`${date.getFullYear()}년 ${
             date.getMonth() + 1
-          }월 ${selectedDate}일`}</h3>
-          <input
-            type="text"
-            name="name"
-            placeholder="사원 이름"
-            value={formData.name}
-            onChange={handleInputChange}
-          />
-          <input
-            type="text"
-            name="year"
-            placeholder="년"
-            value={formData.year}
-            readOnly
-          />
-          <input
-            type="text"
-            name="month"
-            placeholder="월"
-            value={formData.month}
-            readOnly
-          />
-          <input
-            type="text"
-            name="day"
-            placeholder="일"
-            value={formData.day}
-            readOnly
-          />
-          <input
-            type="text"
-            name="reason"
-            placeholder="사유"
-            value={formData.reason}
-            onChange={handleInputChange}
-          />
+          }월 ${selectedDate}일`}</RecordTitle>
+          <RecordDiv>
+            <SInput
+              type="text"
+              name="year"
+              placeholder="년"
+              value={formData.year}
+              readOnly
+            />
+            <SInput
+              type="text"
+              name="month"
+              placeholder="월"
+              value={formData.month}
+              readOnly
+            />
+            <SInput
+              type="text"
+              name="day"
+              placeholder="일"
+              value={formData.day}
+              readOnly
+            />
+            <SInput
+              type="text"
+              name="name"
+              placeholder="사원 이름"
+              value={formData.name}
+              onChange={handleInputChange}
+            />
+            <SInput
+              type="text"
+              name="reason"
+              placeholder="사유"
+              value={formData.reason}
+              onChange={handleInputChange}
+            />
+          </RecordDiv>
           <RecordButton onClick={handleSave}>저장</RecordButton>
         </RecordInput>
       )}
     </CalendarContainer>
   );
 };
+
+const SInput = styled.input`
+  width: 60rem;
+  margin-right: 3rem;
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 0.5rem;
+  font-size: 1.4rem;
+  font-weight: 700;
+`;
+
+const RecordDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const RecordTitle = styled.div`
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-right: 3rem;
+`;
 
 const SHeaderTitle = styled.div`
   font-size: 2.2rem;
@@ -197,7 +220,17 @@ const RecordInput = styled.div`
 `;
 
 const RecordButton = styled.button`
-  margin-top: 10px;
+  padding: 1rem 2rem;
+  border: 1px solid #ddd;
+  border-radius: 0.5rem;
+  background-color: #82b2f8;
+  font-size: 1.4rem;
+  font-weight: 800;
+  cursor: pointer;
+  &:hover {
+    background-color: #82b2f8;
+    color: #fff;
+  }
 `;
 
 const CalendarContainer = styled.div`

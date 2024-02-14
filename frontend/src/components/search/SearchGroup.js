@@ -9,7 +9,6 @@ import {
   userDataState,
   selectedMenuState,
 } from "../../recoil/SearchRecoil";
-import axios from "../../api/axiosConfig";
 import { fetchAllEmployees } from "../../api/userApi"; // Axios 인스턴스
 
 const SearchGroup = () => {
