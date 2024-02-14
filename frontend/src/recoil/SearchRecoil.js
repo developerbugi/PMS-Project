@@ -39,6 +39,27 @@ export const userDataState = atom({
   ],
 });
 
+export const employeeDataState = atom({
+  key: "employeeDataState",
+  default: {
+    name_kor: "", //이름
+    name_eng: "", //영문이름
+    rrn: "", //주민등록번호
+    com_id: "", //사번
+    dep_id: "", //부서
+    mob_num: "", //휴대폰번호
+    rank_id: "", //직급
+    major: "", //전공
+    final_edu: "", //최종학력
+    emp_type: "", //입사구분
+    emp_hiredate: "", //입사일
+    emp_email: "", //이메일
+    military: "", //군필
+    address: "", //주소
+    etc: "", //기타 특이사항
+  },
+});
+
 export const userVacationState = atom({
   key: "userVacationState",
   default: [

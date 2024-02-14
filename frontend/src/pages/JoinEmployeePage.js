@@ -3,8 +3,16 @@ import styled from "styled-components";
 import employeeImage from "../assets/img/logo.png";
 import cameraIcon from "../assets/img/camera_enhance.svg";
 import axios from "axios";
-import { RecoilRoot, atom, useRecoilState } from "recoil";
+import { useRecoilState } from "recoil";
 import { useNavigate } from "react-router-dom";
+
+//import recoil
+import {
+  employeeDataState,
+  selectedIdState,
+  userDataState,
+  selectedMenuState,
+} from "../recoil/SearchRecoil";
 
 const SWrap = styled.div`
   height: 100vh;
@@ -20,12 +28,15 @@ const SWrap = styled.div`
   );
 `;
 const EmployeeSystemContainer = styled.div`
-  max-width: 800px;
-  margin: auto;
-  padding: 20px;
-  border-radius: 8px;
+  width: 92vw;
+  height: 80vh;
+  border-radius: 1rem;
+  padding: 2rem;
+  margin-top: 6rem;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   background: #f9f9f9;
+  display: flex;
+  overflow: hidden;
 `;
 const Header = styled.header`
   h1 {
@@ -78,16 +89,7 @@ const SCameraIcon = styled.img`
   transform: translate(-15px, -30px);
   box-shadow: 0px 8px 24px rgba(149, 157, 165, 0.5); // 그림자 추가
 `;
-const SearchSection = styled.div`
-  display: flex;
-  align-items: center;
 
-  label,
-  input,
-  button {
-    margin-right: 10px;
-  }
-`;
 const ControlButtons = styled.div`
   display: flex;
   align-items: center;
@@ -103,12 +105,7 @@ const InputField = styled.input`
     outline: none;
   }
 `;
-const TextAreaField = styled.textarea`
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  width: 100%;
-`;
+
 const Button = styled.button`
   padding: 10px 15px;
   border: none;
@@ -122,34 +119,20 @@ const Button = styled.button`
     background-color: #477ebf;
   }
 `;
-const employeeState = atom({
-  key: "employeeState",
-  default: {
-    name_kor: "", //이름
-    name_eng: "", //영문이름
-    rrn: "", //주민등록번호
-    com_id: "", //사번
-    dep_id: "", //부서
-    mob_num: "", //휴대폰번호
-    rank_id: "", //직급
-    major: "", //전공
-    final_edu: "", //최종학력
-    emp_type: "", //입사구분
-    emp_hiredate: "", //입사일
-    emp_email: "", //이메일
-    military: "", //군필
-    address: "", //주소
-    etc: "", //기타 특이사항
-  },
-});
 
 const JoinEmployeePage = () => {
   const navigate = useNavigate();
-  const [employee, setEmployee] = useRecoilState(employeeState);
+
+  const [employee, setEmployee] = useRecoilState(employeeDataState);
+  const [selectedId, setSelectedId] = useRecoilState(selectedIdState);
+  const [userData, setUserData] = useRecoilState(userDataState);
+  const [selectedMenu, setSelectedMenu] = useRecoilState(selectedMenuState);
 
   const handleInputChange = (e) => {
     setEmployee({ ...employee, [e.target.name]: e.target.value });
   };
+
+  const userId = employee.com_id;
 
   const handleSubmit = async (event) => {
     // 이벤트의 기본 동작을 중단 (폼 제출에 의한 페이지 새로고침을 막는 역할)
@@ -177,11 +160,13 @@ const JoinEmployeePage = () => {
 
       // API 호출이 성공하면 알림을 표시
       alert("사원이 정상적으로 추가되었습니다");
+      setUserData([...userData, employee]);
+      setSelectedId(userId);
+      setSelectedMenu(7);
 
       console.log(apiData);
-      // setSearch('');  // recoil 상태를 초기화
-      // API 호출이 성공하면 ../search/group 페이지로 이동
-      navigate("../search/group");
+      // // setSearch('');  // recoil 상태를 초기화
+      // navigate(`/profile/${userId}`);
     } catch (error) {
       console.error(error);
 
