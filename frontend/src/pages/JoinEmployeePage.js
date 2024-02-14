@@ -29,7 +29,7 @@ const SWrap = styled.div`
 `;
 const EmployeeSystemContainer = styled.div`
   width: 65vw;
-  height: 60vh;
+  height: 55vh;
   border-radius: 1rem;
   padding: 2rem;
   margin-top: 6rem;
@@ -109,11 +109,13 @@ const InputField = styled.input`
 `;
 
 const Button = styled.button`
-  padding: 10px 15px;
+  padding: 1rem 1.5rem;
   border: none;
   border-radius: 4px;
   color: white;
   background-color: #699cff;
+  font-size: 1.4rem;
+  font-weight: 700;
   cursor: pointer;
   transition: background-color 0.3s;
 
