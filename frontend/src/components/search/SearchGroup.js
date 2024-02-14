@@ -10,7 +10,7 @@ import {
   selectedMenuState,
 } from "../../recoil/SearchRecoil";
 import axios from "../../api/axiosConfig";
-import { fetchAllEmployees } from "../../api/employeesApi"; // Axios 인스턴스
+import { fetchAllEmployees } from "../../api/userApi"; // Axios 인스턴스
 
 const SearchGroup = () => {
   const [searchTerm, setSearchTerm] = useState("");
