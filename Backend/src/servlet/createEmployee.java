@@ -16,6 +16,7 @@ public class createEmployee extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8"); // 요청 인코딩 설정 추가
 
         StringBuilder sb = new StringBuilder();
         BufferedReader reader = request.getReader();
