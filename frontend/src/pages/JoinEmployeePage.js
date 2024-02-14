@@ -28,8 +28,8 @@ const SWrap = styled.div`
   );
 `;
 const EmployeeSystemContainer = styled.div`
-  width: 92vw;
-  height: 80vh;
+  width: 65vw;
+  height: 60vh;
   border-radius: 1rem;
   padding: 2rem;
   margin-top: 6rem;
