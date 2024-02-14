@@ -1,14 +1,21 @@
-import React from "react";
-import styled from "styled-components";
+import React, { useEffect } from "react";
 
-//import component
-import Profile from "../search/information/Profile";
+//import recoil
+import { useRecoilState } from "recoil";
+import { selectedIdState } from "../../recoil/SearchRecoil";
+import EmployeeItem from "./EmployeeItem";
 
 //Home은 관리자 계정이 보이도록 가정
 const SearchHome = () => {
+  const [selectedId, setSelectedId] = useRecoilState(selectedIdState);
+
+  useEffect(() => {
+    setSelectedId(1);
+  }, []);
+
   return (
     <>
-      <Profile />
+      <EmployeeItem />
     </>
   );
 };

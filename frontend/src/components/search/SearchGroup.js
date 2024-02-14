@@ -9,7 +9,6 @@ import {
   userDataState,
   selectedMenuState,
 } from "../../recoil/SearchRecoil";
-import axios from "../../api/axiosConfig";
 import { fetchAllEmployees } from "../../api/userApi"; // Axios 인스턴스
 
 const SearchGroup = () => {
@@ -46,6 +45,7 @@ const SearchGroup = () => {
   const handleListItemClick = (com_id) => {
     setSelectedId(com_id);
     setSelectedMenu(7);
+    navigate(`/employee/${com_id}`);
   };
 
   // 엔터 키 입력 처리

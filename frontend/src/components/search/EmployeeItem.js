@@ -1,17 +1,16 @@
 import React, { useState } from "react";
 import styled, { css } from "styled-components";
 import { useRecoilValue } from "recoil";
-import { userDataState, selectedIdState } from "../../../recoil/SearchRecoil";
+import { userDataState, selectedIdState } from "../../recoil/SearchRecoil";
 
 //import image
-import cameraIcon from "../../../assets/img/camera_enhance.svg";
-import userImage from "../../../assets/img/logo.png";
-import adminImg from "../../../assets/img/admin_label.svg";
-import empImg from "../../../assets/img/sbimg.svg";
-import EmployeeInfo from "./EmployeeInfo";
-import random1 from "../../../assets/img/leaves-8517219_1280.jpg";
-import random2 from "../../../assets/img/squirrel-8536537_1280.jpg";
-import random3 from "../../../assets/img/sunset-8544672_1280.jpg";
+import cameraIcon from "../../assets/img/camera_enhance.svg";
+import userImage from "../../assets/img/logo.png";
+import adminImg from "../../assets/img/admin_label.svg";
+import empImg from "../../assets/img/sbimg.svg";
+import random1 from "../../assets/img/leaves-8517219_1280.jpg";
+import random2 from "../../assets/img/squirrel-8536537_1280.jpg";
+import random3 from "../../assets/img/sunset-8544672_1280.jpg";
 
 const SCameraIcon = styled.img`
   position: absolute;
@@ -147,7 +146,7 @@ const SInput = styled.input`
 //랜덤값
 const randomImages = [random1, random2, random3];
 
-const Profile = () => {
+const EmployeeItem = () => {
   const userId = useRecoilValue(selectedIdState);
   const userData = useRecoilValue(userDataState).find(
     (user) => user.com_id === userId
@@ -160,6 +159,15 @@ const Profile = () => {
   const [position, setPosition] = useState(userData?.rank_id || "");
   const [ssn, setSSN] = useState(userData?.rrn || "");
   const [phoneNumber, setPhoneNumber] = useState(userData?.mob_num || "");
+  const [email, setEmail] = useState(userData?.emp_email || "");
+  const [address, setAddress] = useState(userData?.address || "");
+  const [isJoin, setIsJoin] = useState(userData?.emp_type || "");
+  const [joinIn, setJoinIn] = useState(userData?.emp_hiredate || "");
+  const [joinOut, setJoinOut] = useState(userData?.emp_tmndate || "");
+  const [education, setEducation] = useState(userData?.final_edu || "");
+  const [major, setMajor] = useState(userData?.major || "");
+  const [army, setArmy] = useState(userData?.military || "");
+  const [etc, setEtc] = useState(userData?.etc || "");
 
   const imageToShow =
     userId === 1
@@ -189,6 +197,33 @@ const Profile = () => {
         break;
       case "phoneNumber":
         setPhoneNumber(value);
+        break;
+      case "email":
+        setEmail(value);
+        break;
+      case "address":
+        setAddress(value);
+        break;
+      case "isJoin":
+        setIsJoin(value);
+        break;
+      case "joinIn":
+        setJoinIn(value);
+        break;
+      case "joinOut":
+        setJoinOut(value);
+        break;
+      case "education":
+        setEducation(value);
+        break;
+      case "major":
+        setMajor(value);
+        break;
+      case "army":
+        setArmy(value);
+        break;
+      case "etc":
+        setEtc(value);
         break;
       default:
         break;
@@ -287,11 +322,104 @@ const Profile = () => {
           </SInfoRow>
         </SInfoContainer>
       </SMainDiv>
-      <SInfoDiv>
-        <EmployeeInfo />
-      </SInfoDiv>
+      <SInfoRow>
+        <SItemTitle>상세 정보</SItemTitle>
+      </SInfoRow>
+      <SInfoRow>
+        <SItem>
+          <SSPan>이메일</SSPan>
+          <SInput
+            type="text"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            hasValue={email.length > 0}
+          />
+        </SItem>
+      </SInfoRow>
+      <SInfoRow>
+        <SItem>
+          <SSPan>주소</SSPan>
+          <SInput
+            type="text"
+            value={address}
+            onChange={(e) => setAddress(e.target.value)}
+            hasValue={address.length > 0}
+          />
+        </SItem>
+      </SInfoRow>
+      <SInfoRow>
+        <SItem>
+          <SSPan>입사구분</SSPan>
+          <SInput
+            type="text"
+            value={isJoin}
+            onChange={(e) => setIsJoin(e.target.value)}
+            hasValue={isJoin.length > 0}
+          />
+        </SItem>
+        <SItem>
+          <SSPan>입사일</SSPan>
+          <SInput
+            type="text"
+            value={joinIn}
+            onChange={(e) => setJoinIn(e.target.value)}
+            hasValue={joinIn.length > 0}
+          />
+        </SItem>
+        <SItem>
+          <SSPan>퇴사일</SSPan>
+          <SInput
+            type="text"
+            value={joinOut}
+            onChange={(e) => setJoinOut(e.target.value)}
+            hasValue={joinOut.length > 0}
+          />
+        </SItem>
+      </SInfoRow>
+      <SInfoRow>
+        <SItem>
+          <SSPan>최종학력</SSPan>
+          <SInput
+            type="text"
+            value={education}
+            onChange={(e) => setEducation(e.target.value)}
+            hasValue={education.length > 0}
+          />
+        </SItem>
+        <SItem>
+          <SSPan>전공</SSPan>
+          <SInput
+            type="text"
+            value={major}
+            onChange={(e) => setMajor(e.target.value)}
+            hasValue={major.length > 0}
+          />
+        </SItem>
+      </SInfoRow>
+      <SInfoRow>
+        <SItem>
+          <SSPan>군필</SSPan>
+          <SInput
+            type="text"
+            value={army}
+            onChange={(e) => setArmy(e.target.value)}
+            hasValue={army.length > 0}
+          />
+        </SItem>
+      </SInfoRow>
+      <SInfoRow>
+        <SItem>
+          <SSPan>기타사항</SSPan>
+          <SInput
+            type="text"
+            value={etc}
+            onChange={(e) => setEtc(e.target.value)}
+            hasValue={etc.length > 0}
+          />
+        </SItem>
+      </SInfoRow>
     </SWrap>
   );
 };
 
-export default Profile;
+export default EmployeeItem;
