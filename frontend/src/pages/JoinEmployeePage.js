@@ -36,6 +36,8 @@ const EmployeeSystemContainer = styled.div`
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   background: #f9f9f9;
   display: flex;
+  justify-content: center;
+  align-items: center;
   overflow: hidden;
 `;
 const Header = styled.header`
@@ -162,11 +164,8 @@ const JoinEmployeePage = () => {
       alert("사원이 정상적으로 추가되었습니다");
       setUserData([...userData, employee]);
       setSelectedId(userId);
+      navigate("/search");
       setSelectedMenu(7);
-
-      console.log(apiData);
-      // // setSearch('');  // recoil 상태를 초기화
-      // navigate(`/profile/${userId}`);
     } catch (error) {
       console.error(error);
 

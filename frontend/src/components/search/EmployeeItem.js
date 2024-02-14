@@ -11,6 +11,8 @@ import empImg from "../../assets/img/sbimg.svg";
 import random1 from "../../assets/img/leaves-8517219_1280.jpg";
 import random2 from "../../assets/img/squirrel-8536537_1280.jpg";
 import random3 from "../../assets/img/sunset-8544672_1280.jpg";
+import { exitEmployee } from "../../api/userApi";
+import ExitEmployeeModal from "./ExitEmployeeModal";
 
 const SCameraIcon = styled.img`
   position: absolute;
@@ -43,13 +45,6 @@ const SP = styled.div`
   font-weight: 700;
 `;
 
-const SSP = styled.div`
-  margin-top: 0;
-  margin-left: 4rem;
-  font-size: 1.4rem;
-  font-weight: 700;
-`;
-
 const SImgContainer = styled.div`
   position: relative;
   display: inline-block;
@@ -62,14 +57,6 @@ const SWrap = styled.div`
   flex-direction: column;
   align-items: stretch;
   justify-content: center;
-`;
-
-const SInfoDiv = styled.div`
-  border-top: 1px solid #ddd;
-  height: 80%;
-  margin: 1.5rem;
-  padding: 2rem;
-  overflow: auto; /* 내용이 넘칠 경우 스크롤 생성 */
 `;
 
 const SMainDiv = styled.div`
@@ -143,6 +130,29 @@ const SInput = styled.input`
     `}
 `;
 
+const SInfoDiv = styled.div`
+  border-top: 1px solid #ddd;
+  height: 80%;
+  margin: 1.5rem;
+  padding: 2rem;
+  overflow: auto; /* 내용이 넘칠 경우 스크롤 생성 */
+`;
+
+const SSearchButton = styled.button`
+  padding: 1rem 2.5rem;
+  margin-left: 73rem;
+  border: 1px solid #ddd;
+  border-radius: 0.5rem;
+  background-color: #82b2f8;
+  font-size: 1.4rem;
+  font-weight: 800;
+  cursor: pointer;
+  &:hover {
+    background-color: #82b2f8;
+    color: #fff;
+  }
+`;
+
 //랜덤값
 const randomImages = [random1, random2, random3];
 
@@ -169,66 +179,32 @@ const EmployeeItem = () => {
   const [army, setArmy] = useState(userData?.military || "");
   const [etc, setEtc] = useState(userData?.etc || "");
 
+  //삭제 메소드
+
+  const [isExitModalOpen, setIsExitModalOpen] = useState(false);
+
+  const handleExitClick = () => {
+    setIsExitModalOpen(true);
+  };
+  const handleExitSubmit = (comId, empTmnDate, resignReason) => {
+    // Make the API call using axios or your preferred HTTP client
+    console.log(resignReason);
+    exitEmployee(comId, empTmnDate, resignReason)
+      .then(() => {
+        // Handle successful API response, e.g., reload data, show success message
+        alert("삭제되었습니다.");
+        setIsExitModalOpen(false);
+      })
+      .catch((error) => {
+        // Handle API errors gracefully, e.g., show error message
+        console.error("Error calling exitEmployee API:", error);
+      });
+  };
+
   const imageToShow =
     userId === 1
       ? userImage
       : randomImages[Math.floor(Math.random() * randomImages.length)];
-
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    switch (name) {
-      case "name":
-        setName(value);
-        break;
-      case "englishName":
-        setEnglishName(value);
-        break;
-      case "id":
-        setEmployeeId(value);
-        break;
-      case "department":
-        setDepartment(value);
-        break;
-      case "position":
-        setPosition(value);
-        break;
-      case "ssn":
-        setSSN(value);
-        break;
-      case "phoneNumber":
-        setPhoneNumber(value);
-        break;
-      case "email":
-        setEmail(value);
-        break;
-      case "address":
-        setAddress(value);
-        break;
-      case "isJoin":
-        setIsJoin(value);
-        break;
-      case "joinIn":
-        setJoinIn(value);
-        break;
-      case "joinOut":
-        setJoinOut(value);
-        break;
-      case "education":
-        setEducation(value);
-        break;
-      case "major":
-        setMajor(value);
-        break;
-      case "army":
-        setArmy(value);
-        break;
-      case "etc":
-        setEtc(value);
-        break;
-      default:
-        break;
-    }
-  };
 
   return (
     <SWrap>
@@ -257,6 +233,13 @@ const EmployeeItem = () => {
           )}
         </SImgContainer>
         <SInfoContainer>
+          <SSearchButton onClick={handleExitClick}>퇴사처리</SSearchButton>
+          <ExitEmployeeModal
+            isOpen={isExitModalOpen}
+            onClose={() => setIsExitModalOpen(false)}
+            onSubmit={handleExitSubmit}
+            comId={userId} // Pass the employee's com_id as a prop
+          />
           <SInfoRow>
             <SItemTitle>기본 정보</SItemTitle>
           </SInfoRow>
@@ -322,102 +305,104 @@ const EmployeeItem = () => {
           </SInfoRow>
         </SInfoContainer>
       </SMainDiv>
-      <SInfoRow>
-        <SItemTitle>상세 정보</SItemTitle>
-      </SInfoRow>
-      <SInfoRow>
-        <SItem>
-          <SSPan>이메일</SSPan>
-          <SInput
-            type="text"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            hasValue={email.length > 0}
-          />
-        </SItem>
-      </SInfoRow>
-      <SInfoRow>
-        <SItem>
-          <SSPan>주소</SSPan>
-          <SInput
-            type="text"
-            value={address}
-            onChange={(e) => setAddress(e.target.value)}
-            hasValue={address.length > 0}
-          />
-        </SItem>
-      </SInfoRow>
-      <SInfoRow>
-        <SItem>
-          <SSPan>입사구분</SSPan>
-          <SInput
-            type="text"
-            value={isJoin}
-            onChange={(e) => setIsJoin(e.target.value)}
-            hasValue={isJoin.length > 0}
-          />
-        </SItem>
-        <SItem>
-          <SSPan>입사일</SSPan>
-          <SInput
-            type="text"
-            value={joinIn}
-            onChange={(e) => setJoinIn(e.target.value)}
-            hasValue={joinIn.length > 0}
-          />
-        </SItem>
-        <SItem>
-          <SSPan>퇴사일</SSPan>
-          <SInput
-            type="text"
-            value={joinOut}
-            onChange={(e) => setJoinOut(e.target.value)}
-            hasValue={joinOut.length > 0}
-          />
-        </SItem>
-      </SInfoRow>
-      <SInfoRow>
-        <SItem>
-          <SSPan>최종학력</SSPan>
-          <SInput
-            type="text"
-            value={education}
-            onChange={(e) => setEducation(e.target.value)}
-            hasValue={education.length > 0}
-          />
-        </SItem>
-        <SItem>
-          <SSPan>전공</SSPan>
-          <SInput
-            type="text"
-            value={major}
-            onChange={(e) => setMajor(e.target.value)}
-            hasValue={major.length > 0}
-          />
-        </SItem>
-      </SInfoRow>
-      <SInfoRow>
-        <SItem>
-          <SSPan>군필</SSPan>
-          <SInput
-            type="text"
-            value={army}
-            onChange={(e) => setArmy(e.target.value)}
-            hasValue={army.length > 0}
-          />
-        </SItem>
-      </SInfoRow>
-      <SInfoRow>
-        <SItem>
-          <SSPan>기타사항</SSPan>
-          <SInput
-            type="text"
-            value={etc}
-            onChange={(e) => setEtc(e.target.value)}
-            hasValue={etc.length > 0}
-          />
-        </SItem>
-      </SInfoRow>
+      <SInfoDiv>
+        <SInfoRow>
+          <SItemTitle>상세 정보</SItemTitle>
+        </SInfoRow>
+        <SInfoRow>
+          <SItem>
+            <SSPan>이메일</SSPan>
+            <SInput
+              type="text"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              hasValue={email.length > 0}
+            />
+          </SItem>
+        </SInfoRow>
+        <SInfoRow>
+          <SItem>
+            <SSPan>주소</SSPan>
+            <SInput
+              type="text"
+              value={address}
+              onChange={(e) => setAddress(e.target.value)}
+              hasValue={address.length > 0}
+            />
+          </SItem>
+        </SInfoRow>
+        <SInfoRow>
+          <SItem>
+            <SSPan>입사구분</SSPan>
+            <SInput
+              type="text"
+              value={isJoin}
+              onChange={(e) => setIsJoin(e.target.value)}
+              hasValue={isJoin.length > 0}
+            />
+          </SItem>
+          <SItem>
+            <SSPan>입사일</SSPan>
+            <SInput
+              type="text"
+              value={joinIn}
+              onChange={(e) => setJoinIn(e.target.value)}
+              hasValue={joinIn.length > 0}
+            />
+          </SItem>
+          <SItem>
+            <SSPan>퇴사일</SSPan>
+            <SInput
+              type="text"
+              value={joinOut}
+              onChange={(e) => setJoinOut(e.target.value)}
+              hasValue={joinOut.length > 0}
+            />
+          </SItem>
+        </SInfoRow>
+        <SInfoRow>
+          <SItem>
+            <SSPan>최종학력</SSPan>
+            <SInput
+              type="text"
+              value={education}
+              onChange={(e) => setEducation(e.target.value)}
+              hasValue={education.length > 0}
+            />
+          </SItem>
+          <SItem>
+            <SSPan>전공</SSPan>
+            <SInput
+              type="text"
+              value={major}
+              onChange={(e) => setMajor(e.target.value)}
+              hasValue={major.length > 0}
+            />
+          </SItem>
+        </SInfoRow>
+        <SInfoRow>
+          <SItem>
+            <SSPan>군필</SSPan>
+            <SInput
+              type="text"
+              value={army}
+              onChange={(e) => setArmy(e.target.value)}
+              hasValue={army.length > 0}
+            />
+          </SItem>
+        </SInfoRow>
+        <SInfoRow>
+          <SItem>
+            <SSPan>기타사항</SSPan>
+            <SInput
+              type="text"
+              value={etc}
+              onChange={(e) => setEtc(e.target.value)}
+              hasValue={etc.length > 0}
+            />
+          </SItem>
+        </SInfoRow>
+      </SInfoDiv>
     </SWrap>
   );
 };

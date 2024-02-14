@@ -113,7 +113,7 @@ const SWrap = styled.div`
 
 const SContainer = styled.div`
   width: 92vw;
-  /* height: 80vh; */
+  height: 67vh;
   border-radius: 1rem;
   padding: 2rem;
   margin-top: 6rem;

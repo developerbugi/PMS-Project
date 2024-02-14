@@ -45,7 +45,6 @@ const SearchGroup = () => {
   const handleListItemClick = (com_id) => {
     setSelectedId(com_id);
     setSelectedMenu(7);
-    navigate(`/employee/${com_id}`);
   };
 
   // 엔터 키 입력 처리
