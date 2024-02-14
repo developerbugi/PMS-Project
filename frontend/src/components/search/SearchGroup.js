@@ -10,7 +10,7 @@ import {
   selectedMenuState,
 } from "../../recoil/SearchRecoil";
 import axios from "../../api/axiosConfig";
-import { fetchAllEmployees } from "../../api/employeesApi"; // Axios 인스턴스
+import { fetchAllEmployees } from "../../api/userApi"; // Axios 인스턴스
 
 const SearchGroup = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -38,7 +38,7 @@ const SearchGroup = () => {
   // 이름이 일치하는 사람 필터링
   const handleSearch = () => {
     const results = userData.filter((person) =>
-      person.name_eng.toLowerCase().includes(searchTerm.toLowerCase())
+      person.name_kor.toLowerCase().includes(searchTerm.toLowerCase())
     );
     setSearchResults(results);
   };
@@ -84,8 +84,8 @@ const SearchGroup = () => {
             >
               <div>{person.com_id}</div>
               <div>{person.name_kor}</div>
-              <div>{person.dep}</div>
-              <div>{person.rank_name}</div>
+              <div>{person.dep_id}</div>
+              <div>{person.rank_id}</div>
             </SListItem>
           ))}
         </SSearchResults>

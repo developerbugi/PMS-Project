@@ -153,18 +153,13 @@ const Profile = () => {
     (user) => user.com_id === userId
   );
 
-  // 초기값 설정
-  const [name, setName] = useState(userData.name_kor);
-  const [englishName, setEnglishName] = useState(
-    userData ? userData.name_eng : ""
-  );
-  const [id, setEmployeeId] = useState(userData ? userData.com_id : "");
-  const [department, setDepartment] = useState(userData ? userData.dep : "");
-  const [position, setPosition] = useState(userData ? userData.rank_name : "");
-  const [ssn, setSSN] = useState(userData ? userData.rrn : "");
-  const [phoneNumber, setPhoneNumber] = useState(
-    userData ? userData.mob_num : ""
-  );
+  const [name, setName] = useState(userData?.name_kor || "");
+  const [englishName, setEnglishName] = useState(userData?.name_eng || "");
+  const [id, setEmployeeId] = useState(userData?.com_id || "");
+  const [department, setDepartment] = useState(userData?.dep_id || "");
+  const [position, setPosition] = useState(userData?.rank_id || "");
+  const [ssn, setSSN] = useState(userData?.rrn || "");
+  const [phoneNumber, setPhoneNumber] = useState(userData?.mob_num || "");
 
   const imageToShow =
     userId === 1
